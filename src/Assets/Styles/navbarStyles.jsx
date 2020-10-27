@@ -1,5 +1,3 @@
-import React from "react";
-
 import { createStyles, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import { withStyles, fade } from "@material-ui/core/styles";
 
