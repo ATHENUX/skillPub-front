@@ -18,7 +18,7 @@ You will also see any lint errors in the console.
 run this command to compress the project
 
 ### `npm start`
-run this command to see the project in production
+run this command to see the project in production. \
 Open [http://localhost:5000](http://localhost:3000) to view it in the browser.
 
 ### `npm test`
