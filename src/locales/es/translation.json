@@ -5,10 +5,11 @@
   "system.message.good":"Qué bueno verte",
   "sign.in":"Registrarse",
   "sign.up":"Regístrate",
+  "log.in":"Iniciar Sesión",
   "use.accounts":"O usa tu cuenta",
   "email":"Correo electrónico",
   "password":"Contraseña",
-  "recover.account":"¿Ha olvidado su correo electrónico?",
+  "recover.account":"¿Ha olvidado su Contraseña?",
   "welcome.back":"Bienvenido",
   "system.message":"Para mantenerse conectado con nosotros",
   "create.account":"Crear una cuenta",
@@ -28,5 +29,8 @@
   "feed.back.text.secondary":"Ayúdanos a mejorar la versión del sistema SkillPub",
   "settings":"Configuraciones",
   "theme":"Tema",
-  "log.out":"Cerrar sesión"
+  "log.out":"Cerrar sesión",
+  "modal.text":"dirección de correo electrónico",
+  "forgot.password":"Olvidé la contraseña",
+  "forgot.password.two":"Se te olvidó tu contraseña"
 }

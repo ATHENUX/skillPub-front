@@ -23,7 +23,7 @@ const Overlay = ({ changeAccess, handleChangeAccess }) => {
           <Typography variant="h4">{t("welcome.back")}</Typography>
           <p>{t("system.message")}</p>
           <Button variant="outlined" color="inherit" id="signIn" onClick={() => handleChangeAccess(true)}>
-            {t("sign.in")}
+            {t("log.in")}
           </Button>
         </div>
       </div>

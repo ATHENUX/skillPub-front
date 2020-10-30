@@ -1,8 +1,8 @@
-import { Typography, TextField, Button, Link, Hidden } from "@material-ui/core";
+import { Typography, TextField, Button, Hidden } from "@material-ui/core";
 import { useAccessStyleTheme } from "Assets/Styles/accessStyles";
-
 //components
 import Social from "./Social";
+import Transition from "Components/RecoverPassword";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -25,10 +25,10 @@ const SignIn = ({ changeAccess }) => {
         <TextField type="email" id="Email" label={t("email")} variant="outlined" size="small" />
         <TextField type="password" id="password" label={t("password")} variant="outlined" size="small" />
         <div className={classes.link}>
-          <Link href="#">{t("recover.account")}</Link>
+          <Transition />
         </div>
         <Button variant="contained" color="primary">
-          {t("sign.in")}
+          {t("log.in")}
         </Button>
       </form>
     </div>
