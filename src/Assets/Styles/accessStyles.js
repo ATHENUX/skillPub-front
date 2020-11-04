@@ -105,6 +105,14 @@ export const useAccessStyleTheme = makeStyles((theme) =>
       display: "flex",
       justifyContent: "space-evenly",
     },
+    modalContainer: {
+      textAlign: "center",
+      margin: "0 40px 20px 40px",
+    },
+    iconModal: {
+      fontSize: 100,
+      textAlign: "center",
+    },
     "@keyframes show": {
       "0%, 50%": {
         zIndex: 2,

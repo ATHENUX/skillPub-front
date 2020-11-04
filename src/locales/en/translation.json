@@ -29,5 +29,9 @@
   "feed.back.text.secondary":"Help us improve the version of the SkillPub system",
   "settings":"Settings",
   "theme":"Theme",
-  "log.out":"Log out"
+  "log.out":"Log out",
+  "modal.text":"Email address",
+  "forgot.password":"Did you forget your password",
+  "send.email":"Send",
+  "send.email.cancel":"Cancel"
 }

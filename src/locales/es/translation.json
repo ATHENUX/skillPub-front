@@ -30,7 +30,8 @@
   "settings":"Configuraciones",
   "theme":"Tema",
   "log.out":"Cerrar sesión",
-  "modal.text":"dirección de correo electrónico",
-  "forgot.password":"Olvidé la contraseña",
-  "forgot.password.two":"Se te olvidó tu contraseña"
+  "modal.text":"Correo electrónico",
+  "forgot.password":"Se te olvidó tu contraseña",
+  "send.email":"Enviar",
+  "send.email.cancel":"Cancelar"
 }
