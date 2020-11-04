@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 
 //components
 import Social from "./Social";
+import RecoverPassword from "./RecoverPassword";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -111,10 +112,10 @@ const SignIn = ({ changeAccess, changeShowSpinner }) => {
           <div className={customStyles.messageInput}>{errors?.password?.message}</div>
 
           <div className={classes.link}>
-            <Link href="#">{t("recover.account")}</Link>
+            <RecoverPassword />
           </div>
           <Button type="submit" variant="contained" color="primary">
-            {t("sign.in")}
+            {t("log.in")}
           </Button>
         </form>
       </div>

@@ -34,10 +34,9 @@ const Overlay = ({ changeAccess, handleChangeAccess }) => {
           <Button
             variant="outlined"
             color="inherit"
-            id="signIn"
             onClick={() => handleChangeAccess(true)}
           >
-            {t("sign.in")}
+            {t("log.in")}
           </Button>
         </div>
       </div>

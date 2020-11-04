@@ -5,12 +5,13 @@
   "system.message.good":"Good to see you ",
   "sign.in":"Sign in",
   "sign.up":"Sign up",
+  "log.in":"log in",
   "use.accounts":"Or use your account",
   "email":"Email",
   "email.message.error":"Email not found",
   "password":"Password",
   "password.message.error":"Password is incorrect",
-  "recover.account":"Have you forgotten your email?",
+  "recover.account":"Have you forgotten your password?",
   "welcome.back":"Welcome back!",
   "system.message":"To keep connected with us please login",
   "create.account":"Create account",
@@ -30,5 +31,9 @@
   "feed.back.text.secondary":"Help us improve the version of the SkillPub system",
   "settings":"Settings",
   "theme":"Theme",
-  "log.out":"Log out"
+  "log.out":"Log out",
+  "modal.text":"Email address",
+  "forgot.password":"Did you forget your password",
+  "send.email":"Send",
+  "send.email.cancel":"Cancel"
 }
