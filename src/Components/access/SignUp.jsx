@@ -1,5 +1,5 @@
 import { Typography, TextField, Button, Hidden } from "@material-ui/core";
-import { useAccessStyleTheme } from "Assets/Styles/accessStyles";
+import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 //components
 import Social from "./Social";
@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const SignUp = ({ changeAccess }) => {
   const { t } = useTranslation();
-  const classes = useAccessStyleTheme();
+  const classes = useAccessStyle();
 
   return (
     <div className={`${classes.signUpContainer} ${!changeAccess ? classes.showSingUp : ""}`}>

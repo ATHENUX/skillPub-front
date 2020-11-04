@@ -6,10 +6,10 @@ import google from "Assets/img/svg/google.svg";
 import facebook from "Assets/img/svg/facebook.svg";
 
 //styles
-import { useAccessStyleTheme } from "Assets/Styles/accessStyles";
+import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 const Social = () => {
-  const classes = useAccessStyleTheme();
+  const classes = useAccessStyle();
   return (
     <div className={classes.socialContainer}>
       <Button aria-label="like" size="small">

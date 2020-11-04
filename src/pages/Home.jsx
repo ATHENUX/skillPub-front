@@ -9,7 +9,7 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import HomeIcon from "@material-ui/icons/Home";
 
 //styles
-import { useButtonStyles } from "Assets/Styles/CustomStyles";
+import CustomStyles from "Assets/Styles/CustomStyles";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 const Home = ({ getUserData, user, width }) => {
   const { t, i18n } = useTranslation();
   const [marginChange, setmarginChange] = useState(true);
-  const classes = useButtonStyles({ hide: marginChange });
+  const classes = CustomStyles({ hide: marginChange });
 
   useSEO({
     title: "Home",
@@ -48,7 +48,12 @@ const Home = ({ getUserData, user, width }) => {
         Screen size <strong>{width}</strong>{" "}
       </p>
       <Typography variant="h1"> hello world</Typography>
-      <Button size="small" onClick={getUsers} startIcon={<AccountBoxIcon />} className={classes.btn}>
+      <Button
+        size="small"
+        onClick={getUsers}
+        startIcon={<AccountBoxIcon />}
+        className={classes.btn}
+      >
         get user
       </Button>
       <Button variant="contained" color="primary" onClick={() => setmarginChange(!marginChange)}>
@@ -67,7 +72,11 @@ const Home = ({ getUserData, user, width }) => {
         </ul>
       )}
       {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-        <p key={i}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae repellat tempora mollitia iusto unde libero veritatis possimus dolore laudantium! Adipisci labore quia corrupti illum perspiciatis distinctio minus, accusamus reiciendis enim.</p>
+        <p key={i}>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae repellat tempora mollitia
+          iusto unde libero veritatis possimus dolore laudantium! Adipisci labore quia corrupti
+          illum perspiciatis distinctio minus, accusamus reiciendis enim.
+        </p>
       ))}
     </Container>
   );

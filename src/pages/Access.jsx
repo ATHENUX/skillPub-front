@@ -6,7 +6,7 @@ import useLanguageBrowser from "Hooks/useLanguageBrowser";
 import { Container, Card, Grid } from "@material-ui/core";
 
 //styles
-import { useAccessStyleTheme } from "Assets/Styles/accessStyles";
+import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 //components
 import SignIn from "Components/access/SignIn";
@@ -14,7 +14,7 @@ import SignUp from "Components/access/SignUp";
 import Overlay from "Components/access/Overlay";
 
 const Access = () => {
-  const classes = useAccessStyleTheme();
+  const classes = useAccessStyle();
   const [changeAccess, setChangeAccess] = useState(true);
 
   useSEO({
