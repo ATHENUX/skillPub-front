@@ -31,8 +31,8 @@ const SignIn = ({ changeAccess }) => {
   const { register, handleSubmit, errors } = useForm();
   const classes = useAccessStyle();
   const customStyles = useCustomStyles();
-  const { t } = useTranslation();
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleSignIn = async (data) => {
     const { email, password } = data;
@@ -64,7 +64,7 @@ const SignIn = ({ changeAccess }) => {
   };
 
   const handleClose = () => {
-    setSnackBar({ ...initialSnackBarProps, show: false });
+    setSnackBar(initialSnackBarProps);
   };
 
   return (
