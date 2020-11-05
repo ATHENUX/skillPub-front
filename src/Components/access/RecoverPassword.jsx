@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import CloseIcon from "@material-ui/icons/Close";
-import { useAccessStyleTheme } from "Assets/Styles/accessStyles";
+import { useAccessStyle } from "Assets/Styles/accessStyles";
 import { withStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -44,7 +44,7 @@ const Transition = forwardRef(newTransition);
 const AlertDialogSlide = () => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const classes = useAccessStyleTheme();
+  const classes = useAccessStyle();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -91,7 +91,7 @@ const AlertDialogSlide = () => {
             {t("forgot.password")}
           </DialogTitle>
           <LockIcon color="primary" className={classes.iconModal} />
-          <form className={classes.formStyle} style={{ width: "100%" }}>
+          <form className={classes.formStyleRecoverPassword}>
             <TextField
               type="email"
               label={t("modal.text")}

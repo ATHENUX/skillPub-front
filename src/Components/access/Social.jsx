@@ -1,12 +1,10 @@
 //material ui
 import { Button } from "@material-ui/core";
+import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 //svg
 import google from "Assets/img/svg/google.svg";
 import facebook from "Assets/img/svg/facebook.svg";
-
-//styles
-import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 const Social = () => {
   const classes = useAccessStyle();

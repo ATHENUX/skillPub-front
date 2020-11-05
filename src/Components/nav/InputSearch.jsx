@@ -1,8 +1,6 @@
 //material ui
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-
-//styles
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
 
 //i18n

@@ -1,17 +1,24 @@
-import { Grid, Typography, Paper, Button, Hidden } from "@material-ui/core";
+//hooks
 import useSEO from "Hooks/useSEO";
 import useLanguageBrowser from "Hooks/useLanguageBrowser";
-//Router
-import { Link as RouterLink } from "react-router-dom";
+
+//material ui
+import { Grid, Typography, Paper, Button, Hidden } from "@material-ui/core";
+import { useErrorPageStyles } from "Assets/Styles/errorPagesStyles";
+
 //i18n
 import { useTranslation } from "react-i18next";
-// styles
-import { useErrorPageStyles } from "Assets/Styles/errorPagesStyles";
+
+//Router
+import { Link as RouterLink } from "react-router-dom";
 
 const InternalServerError = () => {
   const classes = useErrorPageStyles();
   const { t } = useTranslation();
-  useSEO({ title: "Internal server error", description: "The server responded with a status of 500" });
+  useSEO({
+    title: "Internal server error",
+    description: "The server responded with a status of 500",
+  });
   useLanguageBrowser();
 
   return (

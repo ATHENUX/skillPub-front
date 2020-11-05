@@ -1,11 +1,8 @@
+import { useLocation } from "react-router-dom";
+
 //material ui
 import { Hidden } from "@material-ui/core";
-
-//styles
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
-
-//router dom
-import { useLocation } from "react-router-dom";
 
 //components
 import NavBarSecondary from "./NavBarSecondary";

@@ -4,6 +4,9 @@ export const useAccessStyle = makeStyles((theme) =>
   createStyles({
     root: {
       height: "100vh",
+      "& .MuiGrid-item": {
+        maxWidth: "100%",
+      },
     },
     link: {
       marginBottom: "10px",
@@ -48,6 +51,11 @@ export const useAccessStyle = makeStyles((theme) =>
       "& .MuiInputBase-root": {
         borderRadius: "30px 30px",
       },
+    },
+    formStyleRecoverPassword: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
     },
     overlayContainer: {
       position: "absolute",

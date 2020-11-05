@@ -1,4 +1,3 @@
-//initial state
 const initialState = {
   name: "",
   lastName: "",

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
 //material ui
-import { Typography, TextField, Button, Link, Hidden, Snackbar } from "@material-ui/core";
+import { Typography, TextField, Button, Hidden, Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
-import CustomStyles from "Assets/Styles/CustomStyles";
+import useCustomStyles from "Assets/Styles/CustomStyles";
 
 //react-form
 import { useForm } from "react-hook-form";
@@ -31,7 +32,7 @@ const SignIn = ({ changeAccess, changeShowSpinner }) => {
   const [snackBar, setSnackBar] = useState(initialSnackBarProps);
   const { register, handleSubmit, errors } = useForm();
   const classes = useAccessStyle();
-  const customStyles = CustomStyles();
+  const customStyles = useCustomStyles();
   const { t } = useTranslation();
   const history = useHistory();
 

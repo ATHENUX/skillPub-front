@@ -1,6 +1,14 @@
 import { useState } from "react";
+
 //material ui
-import { IconButton, ListItemText, Divider, Avatar, ListItem, ListItemAvatar } from "@material-ui/core";
+import {
+  IconButton,
+  ListItemText,
+  Divider,
+  Avatar,
+  ListItem,
+  ListItemAvatar,
+} from "@material-ui/core";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -9,8 +17,6 @@ import FeedbackIcon from "@material-ui/icons/Feedback";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-
-//styles
 import { StyledMenuItem, StyledMenu } from "Assets/Styles/navbarStyles";
 
 //i18n
@@ -41,7 +47,13 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
       <IconButton onClick={handleClick} color="inherit">
         <MoreVertIcon />
       </IconButton>
-      <StyledMenu id="customized-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <StyledMenu
+        id="customized-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
         <StyledMenuItem>
           <ListItem component="div">
             <ListItemAvatar>

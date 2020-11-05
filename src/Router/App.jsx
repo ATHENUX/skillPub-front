@@ -11,8 +11,6 @@ import NotFound from "pages/NotFound";
 
 //components
 import BackdropSpinner from "Components/spinner/BackdropSpinner";
-
-//navbar
 import Navbar from "Components/nav/Navbar";
 
 //react & redux

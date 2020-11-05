@@ -9,7 +9,7 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import HomeIcon from "@material-ui/icons/Home";
 
 //styles
-import CustomStyles from "Assets/Styles/CustomStyles";
+import useCustomStyles from "Assets/Styles/CustomStyles";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 const Home = ({ getUserData, user, width }) => {
   const { t, i18n } = useTranslation();
   const [marginChange, setmarginChange] = useState(true);
-  const classes = CustomStyles({ hide: marginChange });
+  const classes = useCustomStyles({ hide: marginChange });
 
   useSEO({
     title: "Home",

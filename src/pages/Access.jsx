@@ -1,11 +1,11 @@
 import { useState } from "react";
 import useSEO from "Hooks/useSEO";
+
+//hooks
 import useLanguageBrowser from "Hooks/useLanguageBrowser";
 
 //Material ui
 import { Container, Card, Grid } from "@material-ui/core";
-
-//styles
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 //components
