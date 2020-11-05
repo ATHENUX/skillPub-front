@@ -3,12 +3,10 @@ import { createStore, combineReducers } from "redux";
 //reducers
 import User from "./Reducers/User";
 import ThemeMode from "./Reducers/ThemeMode";
-import Spinner from "./Reducers/spinners";
 
 const reducer = combineReducers({
   User,
   ThemeMode,
-  Spinner,
 });
 
 const composeEnhancers =
