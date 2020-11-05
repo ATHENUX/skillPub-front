@@ -1,6 +1,6 @@
 import { createStyles, makeStyles } from "@material-ui/core";
 
-export const useAccessStyleTheme = makeStyles((theme) =>
+export const useAccessStyle = makeStyles((theme) =>
   createStyles({
     root: {
       height: "100vh",
