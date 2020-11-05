@@ -128,7 +128,7 @@ const SignUp = ({ changeAccess }) => {
           />
           <div className={customStyles.messageInput}>{errors?.password?.message}</div>
 
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" className={classes.Button}>
             {t("sign.up")}
           </Button>
         </form>

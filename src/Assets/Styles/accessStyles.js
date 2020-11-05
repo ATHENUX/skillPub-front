@@ -8,8 +8,8 @@ export const useAccessStyle = makeStyles((theme) =>
         maxWidth: "100%",
       },
     },
-    link: {
-      marginBottom: "10px",
+    Button: {
+      marginTop: "10px",
     },
     content: {
       position: "relative",

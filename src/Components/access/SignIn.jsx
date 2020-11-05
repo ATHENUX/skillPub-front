@@ -109,10 +109,9 @@ const SignIn = ({ changeAccess }) => {
           />
           <div className={customStyles.messageInput}>{errors?.password?.message}</div>
 
-          <div className={classes.link}>
-            <RecoverPassword />
-          </div>
-          <Button type="submit" variant="contained" color="primary">
+          <RecoverPassword />
+
+          <Button type="submit" variant="contained" color="primary" className={classes.Button}>
             {t("log.in")}
           </Button>
         </form>
