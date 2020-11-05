@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 //components
 import Social from "./Social";
 import RecoverPassword from "./RecoverPassword";
+import BackdropSpinner from "Components/spinner/BackdropSpinner";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -20,16 +21,13 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-//react & redux
-import { connect } from "react-redux";
-import { changeShowSpinner } from "Redux/Reducers/spinners";
-
-const SignIn = ({ changeAccess, changeShowSpinner }) => {
+const SignIn = ({ changeAccess }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
   };
   const [snackBar, setSnackBar] = useState(initialSnackBarProps);
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, errors } = useForm();
   const classes = useAccessStyle();
   const customStyles = useCustomStyles();
@@ -39,11 +37,9 @@ const SignIn = ({ changeAccess, changeShowSpinner }) => {
   const handleSignIn = async (data) => {
     const { email, password } = data;
     try {
-      changeShowSpinner(true);
+      setIsLoading(true);
       const res = await axios.post("/signIn", { email, password });
-      setTimeout(() => {
-        changeShowSpinner(false);
-      }, 3000);
+      setIsLoading(false);
       const { success } = res.data;
       if (success) {
         localStorage.setItem("session", res.data.token);
@@ -57,6 +53,7 @@ const SignIn = ({ changeAccess, changeShowSpinner }) => {
         }
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("error: =>", error);
       initialSnackBarProps.message = t("internal.server.error.title");
     }
@@ -133,12 +130,9 @@ const SignIn = ({ changeAccess, changeShowSpinner }) => {
           {snackBar.message}
         </MuiAlert>
       </Snackbar>
+      <BackdropSpinner isLoading={isLoading} />
     </>
   );
 };
 
-const mapDispatchToProps = {
-  changeShowSpinner,
-};
-
-export default connect(null, mapDispatchToProps)(SignIn);
+export default SignIn;
