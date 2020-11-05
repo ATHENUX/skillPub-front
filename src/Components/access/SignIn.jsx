@@ -31,8 +31,8 @@ const SignIn = ({ changeAccess }) => {
   const { register, handleSubmit, errors } = useForm();
   const classes = useAccessStyle();
   const customStyles = useCustomStyles();
-  const { t } = useTranslation();
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleSignIn = async (data) => {
     const { email, password } = data;
@@ -64,7 +64,7 @@ const SignIn = ({ changeAccess }) => {
   };
 
   const handleClose = () => {
-    setSnackBar({ ...initialSnackBarProps, show: false });
+    setSnackBar(initialSnackBarProps);
   };
 
   return (
@@ -109,10 +109,9 @@ const SignIn = ({ changeAccess }) => {
           />
           <div className={customStyles.messageInput}>{errors?.password?.message}</div>
 
-          <div className={classes.link}>
-            <RecoverPassword />
-          </div>
-          <Button type="submit" variant="contained" color="primary">
+          <RecoverPassword />
+
+          <Button type="submit" variant="contained" color="primary" className={classes.Button}>
             {t("log.in")}
           </Button>
         </form>
