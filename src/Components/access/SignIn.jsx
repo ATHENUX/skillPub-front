@@ -91,7 +91,7 @@ const SignIn = ({ changeAccess }) => {
             size="small"
             error={Boolean(errors?.email)}
             inputRef={register({
-              required: { value: true, message: "email is required" },
+              required: { value: true, message: t("email.message.error.input.required") },
             })}
           />
           <div className={customStyles.messageInput}>{errors?.email?.message}</div>
@@ -103,8 +103,8 @@ const SignIn = ({ changeAccess }) => {
             size="small"
             error={Boolean(errors?.password)}
             inputRef={register({
-              required: { value: true, message: "password is required" },
-              minLength: { value: 6, message: "contreseña pequeña" },
+              required: { value: true, message: t("password.message.error.input.required") },
+              minLength: { value: 6, message: t("password.message.error.input.short") },
             })}
           />
           <div className={customStyles.messageInput}>{errors?.password?.message}</div>
