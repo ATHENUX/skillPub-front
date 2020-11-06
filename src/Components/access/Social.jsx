@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 //material ui
-import { Button, Snackbar } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
+import { Button } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 
 //svg
 import google from "Assets/img/svg/google.svg";
 import facebook from "Assets/img/svg/facebook.svg";
+
+//components
+import SnackBar from "./SnackBar";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -141,19 +143,7 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
           )}
         />
       </div>
-      <Snackbar
-        open={snackBar.show}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <MuiAlert elevation={6} variant="filled" severity="error">
-          {snackBar.message}
-        </MuiAlert>
-      </Snackbar>
+      <SnackBar snackBar={snackBar} handleClose={handleClose} />
     </>
   );
 };
