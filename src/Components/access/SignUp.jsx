@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 //material ui
-import { Typography, TextField, Button, Hidden, Snackbar } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
+import { Typography, TextField, Button, Hidden } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 import useCustomStyles from "Assets/Styles/CustomStyles";
 
@@ -12,6 +11,7 @@ import { useForm } from "react-hook-form";
 
 //components
 import Social from "./Social";
+import SnackBar from "./SnackBar";
 import BackdropSpinner from "Components/spinner/BackdropSpinner";
 
 //i18n
@@ -39,14 +39,13 @@ const SignUp = ({ changeAccess }) => {
       setIsLoading(true);
       const res = await axios.post("/signUp", { email, password, firstName, lastName });
       setIsLoading(false);
-      const { success } = res.data;
+      const { success, token, message } = res.data;
       if (success) {
-        localStorage.setItem("session", res.data.token);
+        localStorage.setItem("session", token);
         //redirect to "create initial settings"
-        history.push("/");
-        return;
+        return history.push("/");
       } else {
-        if (res.data.message === "Email is already registered") {
+        if (message === "Email is already registered") {
           initialSnackBarProps.message = t("email.message.error.registered");
         }
       }
@@ -65,6 +64,10 @@ const SignUp = ({ changeAccess }) => {
     setSnackBar(initialSnackBarProps);
   };
 
+  const handleopenBackDrop = (value) => {
+    setIsLoading(value);
+  };
+
   return (
     <>
       <div className={`${classes.signUpContainer} ${!changeAccess ? classes.showSingUp : ""}`}>
@@ -75,7 +78,7 @@ const SignUp = ({ changeAccess }) => {
           <Hidden smUp>
             <Typography variant="h6">{t("create.account")}</Typography>
           </Hidden>
-          <Social />
+          <Social handleopenBackDrop={handleopenBackDrop} validateAccess="signUp" />
           <span>{t("use.account.register")}</span>
           <TextField
             type="email"
@@ -133,19 +136,7 @@ const SignUp = ({ changeAccess }) => {
           </Button>
         </form>
       </div>
-      <Snackbar
-        open={snackBar.show}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <MuiAlert elevation={6} variant="filled" severity="error">
-          {snackBar.message}
-        </MuiAlert>
-      </Snackbar>
+      <SnackBar snackBar={snackBar} handleClose={handleClose} />
       <BackdropSpinner isLoading={isLoading} />
     </>
   );
