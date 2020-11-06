@@ -43,8 +43,7 @@ const SignUp = ({ changeAccess }) => {
       if (success) {
         localStorage.setItem("session", res.data.token);
         //redirect to "create initial settings"
-        history.push("/");
-        return;
+        return history.push("/");
       } else {
         if (res.data.message === "Email is already registered") {
           initialSnackBarProps.message = t("email.message.error.registered");
@@ -65,6 +64,11 @@ const SignUp = ({ changeAccess }) => {
     setSnackBar(initialSnackBarProps);
   };
 
+  const handleopenBackDrop = (value) => {
+    console.log(value);
+    setIsLoading(value);
+  };
+
   return (
     <>
       <div className={`${classes.signUpContainer} ${!changeAccess ? classes.showSingUp : ""}`}>
@@ -75,7 +79,7 @@ const SignUp = ({ changeAccess }) => {
           <Hidden smUp>
             <Typography variant="h6">{t("create.account")}</Typography>
           </Hidden>
-          <Social />
+          <Social handleopenBackDrop={handleopenBackDrop} validateAccess="signUp" />
           <span>{t("use.account.register")}</span>
           <TextField
             type="email"

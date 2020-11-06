@@ -43,8 +43,7 @@ const SignIn = ({ changeAccess }) => {
       const { success } = res.data;
       if (success) {
         localStorage.setItem("session", res.data.token);
-        history.push("/");
-        return;
+        return history.push("/");
       } else {
         if (res.data.message === "Email not found") {
           initialSnackBarProps.message = t("email.message.error");
@@ -67,6 +66,11 @@ const SignIn = ({ changeAccess }) => {
     setSnackBar(initialSnackBarProps);
   };
 
+  const handleopenBackDrop = (value) => {
+    console.log(value);
+    setIsLoading(value);
+  };
+
   return (
     <>
       <div className={classes.signInContainer}>
@@ -80,7 +84,7 @@ const SignIn = ({ changeAccess }) => {
           <Hidden smUp>
             <Typography variant="h6">{t("sign.in")}</Typography>
           </Hidden>
-          <Social />
+          <Social handleopenBackDrop={handleopenBackDrop} validateAccess="signIn" />
           <Typography variant="caption">{t("use.accounts")}</Typography>
 
           <TextField
