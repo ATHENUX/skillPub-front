@@ -40,12 +40,12 @@ const SignIn = ({ changeAccess }) => {
       setIsLoading(true);
       const res = await axios.post("/signIn", { email, password });
       setIsLoading(false);
-      const { success } = res.data;
+      const { success, token, message } = res.data;
       if (success) {
-        localStorage.setItem("session", res.data.token);
+        localStorage.setItem("session", token);
         return history.push("/");
       } else {
-        if (res.data.message === "Email not found") {
+        if (message === "Email not found") {
           initialSnackBarProps.message = t("email.message.error");
         } else {
           initialSnackBarProps.message = t("password.message.error");
@@ -67,7 +67,6 @@ const SignIn = ({ changeAccess }) => {
   };
 
   const handleopenBackDrop = (value) => {
-    console.log(value);
     setIsLoading(value);
   };
 

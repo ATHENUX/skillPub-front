@@ -39,13 +39,13 @@ const SignUp = ({ changeAccess }) => {
       setIsLoading(true);
       const res = await axios.post("/signUp", { email, password, firstName, lastName });
       setIsLoading(false);
-      const { success } = res.data;
+      const { success, token, message } = res.data;
       if (success) {
-        localStorage.setItem("session", res.data.token);
+        localStorage.setItem("session", token);
         //redirect to "create initial settings"
         return history.push("/");
       } else {
-        if (res.data.message === "Email is already registered") {
+        if (message === "Email is already registered") {
           initialSnackBarProps.message = t("email.message.error.registered");
         }
       }
@@ -65,7 +65,6 @@ const SignUp = ({ changeAccess }) => {
   };
 
   const handleopenBackDrop = (value) => {
-    console.log(value);
     setIsLoading(value);
   };
 

@@ -16,8 +16,9 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-//google
+//google & facebook
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 const Social = ({ handleopenBackDrop, validateAccess }) => {
   const initialSnackBarProps = {
@@ -67,6 +68,43 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
     console.error(("errors: ", response));
   };
 
+  const responseFacebook = async (response) => {
+    if (response.status === "unknown") return;
+    try {
+      handleopenBackDrop(true);
+      const res = await axios.post("/facebookAccess", {
+        accessToken: response.accessToken,
+        userId: response.userID,
+        validateAccess,
+      });
+      handleopenBackDrop(false);
+      const { success, message, token } = res.data;
+      if (success) {
+        if (message === "User found") {
+          localStorage.setItem("session", token);
+          return history.push("/");
+        } else {
+          //redirect to "create initial settings"
+          localStorage.setItem("session", token);
+          return history.push("/");
+        }
+      } else {
+        if (message === "Email not found") {
+          initialSnackBarProps.message = t("email.message.error");
+        } else if (message === "Email is already registered") {
+          initialSnackBarProps.message = t("email.message.error.registered");
+        } else {
+          throw new Error("internal server error");
+        }
+      }
+    } catch (error) {
+      handleopenBackDrop(false);
+      initialSnackBarProps.message = t("internal.server.error.title");
+      console.error(error);
+    }
+    setSnackBar({ ...initialSnackBarProps, show: true });
+  };
+
   const handleClose = () => {
     setSnackBar(initialSnackBarProps);
   };
@@ -90,9 +128,18 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
           onFailure={responseErrorGoogle}
           cookiePolicy={"single_host_origin"}
         />
-        <Button aria-label="like" size="small">
-          <img src={facebook} alt="facebook" className={classes.images} />
-        </Button>
+
+        <FacebookLogin
+          appId="716647445609370"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={responseFacebook}
+          render={(renderProps) => (
+            <Button onClick={renderProps.onClick} aria-label="like" size="small">
+              <img src={facebook} alt="facebook" className={classes.images} />
+            </Button>
+          )}
+        />
       </div>
       <Snackbar
         open={snackBar.show}
