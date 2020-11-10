@@ -13,7 +13,11 @@ const Navbar = (props) => {
   const classes = useNavbarStyles();
 
   let location = useLocation();
-  if (location.pathname === "/access" || location.pathname === "/404") {
+  if (
+    location.pathname === "/access" ||
+    location.pathname === "/404" ||
+    location.pathname === "/500"
+  ) {
     return null;
   }
 

@@ -14,6 +14,7 @@ import Navbar from "Components/nav/Navbar";
 
 //react & redux
 import { connect } from "react-redux";
+import PrivateRoute from "./PrivateRoute";
 
 const App = ({ mode }) => {
   return (
@@ -22,7 +23,7 @@ const App = ({ mode }) => {
         <CssBaseline />
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/" component={Home} />
           <Route exact path="/access" component={Access} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="*">
