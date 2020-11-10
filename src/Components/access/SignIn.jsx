@@ -48,8 +48,6 @@ const SignIn = ({ changeAccess }) => {
   const history = useHistory();
   const { t } = useTranslation();
 
-  console.log(errors?.password);
-
   const handleSignIn = async (data) => {
     const { email, password } = data;
     try {
