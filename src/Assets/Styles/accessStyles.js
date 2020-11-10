@@ -121,6 +121,12 @@ export const useAccessStyle = makeStyles((theme) =>
       fontSize: 100,
       textAlign: "center",
     },
+    passwordInput: {
+      width: "22ch",
+    },
+    formStylePassword: {
+      marginTop: "10px",
+    },
     "@keyframes show": {
       "0%, 50%": {
         zIndex: 2,
