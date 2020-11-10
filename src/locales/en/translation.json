@@ -11,6 +11,7 @@
   "email.message.error":"Email not found",
   "email.message.error.registered":"Email is already registered",
   "email.message.error.input.required":"Email is required",
+  "email.message.error.unverified":"Unverified email",
   "password":"Password",
   "password.message.error":"Password is incorrect",
   "password.message.error.input.required":"Password is required",
