@@ -7,14 +7,12 @@ import {
   TextField,
   Button,
   Hidden,
-  Snackbar,
   OutlinedInput,
   InputAdornment,
   IconButton,
   InputLabel,
   FormControl,
 } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 import useCustomStyles from "Assets/Styles/CustomStyles";
 import Visibility from "@material-ui/icons/Visibility";

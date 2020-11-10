@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 import useSEO from "Hooks/useSEO";
 
 //hooks
@@ -27,6 +28,11 @@ const Access = () => {
   const handleChangeAccess = (changeAccess) => {
     setChangeAccess(changeAccess);
   };
+
+  const auth = localStorage.getItem("session");
+  if (Boolean(auth)) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container>
