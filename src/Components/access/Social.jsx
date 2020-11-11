@@ -35,7 +35,10 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
   const responseGoogle = async (response) => {
     try {
       handleopenBackDrop(true);
-      const res = await axios.post("/googleAccess", { tokenId: response.tokenId, validateAccess });
+      const res = await axios.post("/api/googleAccess", {
+        tokenId: response.tokenId,
+        validateAccess,
+      });
       handleopenBackDrop(false);
       const { success, message, token } = res.data;
       if (success) {
@@ -74,7 +77,7 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
     if (response.status === "unknown") return;
     try {
       handleopenBackDrop(true);
-      const res = await axios.post("/facebookAccess", {
+      const res = await axios.post("/api/facebookAccess", {
         accessToken: response.accessToken,
         userId: response.userID,
         validateAccess,

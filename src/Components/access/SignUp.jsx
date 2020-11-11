@@ -50,7 +50,7 @@ const SignUp = ({ changeAccess }) => {
     const { email, password, firstName, lastName } = data;
     try {
       setIsLoading(true);
-      const res = await axios.post("/signUp", { email, password, firstName, lastName });
+      const res = await axios.post("/api/signUp", { email, password, firstName, lastName });
       setIsLoading(false);
       const { success, token, message } = res.data;
       if (success) {

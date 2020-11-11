@@ -51,7 +51,7 @@ const SignIn = ({ changeAccess }) => {
     const { email, password } = data;
     try {
       setIsLoading(true);
-      const res = await axios.post("/signIn", { email, password });
+      const res = await axios.post("/api/signIn", { email, password });
       setIsLoading(false);
       const { success, token, message } = res.data;
       if (success) {
