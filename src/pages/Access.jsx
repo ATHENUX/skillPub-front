@@ -13,6 +13,7 @@ import { useAccessStyle } from "Assets/Styles/accessStyles";
 import SignIn from "Components/access/SignIn";
 import SignUp from "Components/access/SignUp";
 import Overlay from "Components/access/Overlay";
+import { useValidateAuth } from "Hooks/useValidateAuth";
 
 const Access = () => {
   const classes = useAccessStyle();
@@ -29,8 +30,8 @@ const Access = () => {
     setChangeAccess(changeAccess);
   };
 
-  const auth = localStorage.getItem("session");
-  if (Boolean(auth)) {
+  const isLogged = useValidateAuth();
+  if (Boolean(isLogged)) {
     return <Redirect to="/" />;
   }
 
