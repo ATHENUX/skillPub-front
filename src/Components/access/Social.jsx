@@ -10,7 +10,7 @@ import google from "Assets/img/svg/google.svg";
 import facebook from "Assets/img/svg/facebook.svg";
 
 //components
-import SnackBar from "./SnackBar";
+import SnackBar from "Components/SnackBar";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -26,6 +26,9 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
+    vertical: "top",
+    horizontal: "left",
+    severity: "error",
   };
   const [snackBar, setSnackBar] = useState(initialSnackBarProps);
   const classes = useAccessStyle();

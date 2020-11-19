@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 //components
 import Social from "./Social";
 import RecoverPassword from "./RecoverPassword";
-import SnackBar from "./SnackBar";
+import SnackBar from "Components/SnackBar";
 import BackdropSpinner from "Components/spinner/BackdropSpinner";
 
 //i18n
@@ -34,6 +34,9 @@ const SignIn = ({ changeAccess }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
+    vertical: "top",
+    horizontal: "left",
+    severity: "error",
   };
   const [values, setValues] = useState(false);
   const [snackBar, setSnackBar] = useState(initialSnackBarProps);
