@@ -48,7 +48,7 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
         } else {
           //redirect to "create initial settings"
           localStorage.setItem("session", token);
-          return history.push("/");
+          return history.push("/settings");
         }
       } else {
         if (message === "Email not found") {
@@ -91,7 +91,7 @@ const Social = ({ handleopenBackDrop, validateAccess }) => {
         } else {
           //redirect to "create initial settings"
           localStorage.setItem("session", token);
-          return history.push("/");
+          return history.push("/settings");
         }
       } else {
         if (message === "Email not found") {
