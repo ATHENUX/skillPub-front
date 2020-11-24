@@ -36,7 +36,7 @@ const StepperuserData = ({
   gender,
   handleChangeGender,
   checked,
-  handleChecked,
+  handleGeolocationChecked,
   selectedDate,
   setSelectedDate,
 }) => {
@@ -60,7 +60,7 @@ const StepperuserData = ({
     <Card elevation={0}>
       <CardContent className={classes.cardContent}>
         <div>
-          <Typography>User's personal data</Typography>
+          <Typography>{t("enter.data")}</Typography>
           <Divider />
         </div>
         <form onSubmit={handleSubmit(saveUserData)} className={classes.formStyle}>
@@ -95,7 +95,7 @@ const StepperuserData = ({
           <TextField
             type="number"
             name="phone"
-            label={t("Phone")}
+            label={t("phone")}
             variant="outlined"
             size="small"
             inputRef={register}
@@ -106,8 +106,8 @@ const StepperuserData = ({
               orientation={orientation ? "portrait" : "landscape"}
               variant="inline"
               name="dateOfBirth"
-              label="Date of birth"
-              format="DD-MM-YYYY HH:mm"
+              label={t("birth.date")}
+              format="DD-MM-YYYY"
               maxDate={new Date()}
               value={selectedDate}
               onChange={setSelectedDate}
@@ -115,28 +115,33 @@ const StepperuserData = ({
           </MuiPickersUtilsProvider>
 
           <div>
-            <FormLabel component="legend">Gender</FormLabel>
+            <FormLabel component="legend">{t("gender")}</FormLabel>
             <RadioGroup
-              aria-label="gender"
+              aria-label={t("gender")}
               name="gender"
               value={gender}
               onChange={handleChangeGender}
             >
-              <FormControlLabel value="F" control={<Radio />} label="Female" />
-              <FormControlLabel value="M" control={<Radio />} label="Male" />
-              <FormControlLabel value="other" control={<Radio />} label="Other" />
+              <FormControlLabel value="F" control={<Radio />} label={t("gender.female")} />
+              <FormControlLabel value="M" control={<Radio />} label={t("gender.male")} />
+              <FormControlLabel value="other" control={<Radio />} label={t("gender.other")} />
             </RadioGroup>
           </div>
 
           <Card elevation={0} className={classes.constrastCard}>
             <CardContent className={classes.locationContainer}>
-              <Typography>Location</Typography>
-              <Switch checked={checked} onChange={handleChecked} name="checkedB" color="primary" />
+              <Typography>{t("location")}</Typography>
+              <Switch
+                checked={checked}
+                onChange={handleGeolocationChecked}
+                name="checked"
+                color="primary"
+              />
             </CardContent>
           </Card>
 
-          <Button type="submit" variant="contained" color="primary" className={classes.button}>
-            save
+          <Button type="submit" variant="contained" color="primary" className={classes.spacingTop}>
+            {t("save")}
           </Button>
         </form>
       </CardContent>

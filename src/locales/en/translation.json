@@ -41,5 +41,20 @@
   "modal.text":"Email address",
   "forgot.password":"Did you forget your password",
   "send.email":"Send",
-  "send.email.cancel":"Cancel"
+  "send.email.cancel":"Cancel",
+  "profile.setting":"Profile settings",
+  "select.skills":"Select your skills",
+  "successful":"Wonderful",
+  "geolocation.warning":"Geolocation not available",
+  "enter.data":"Personal information",
+  "phone":"Phone",
+  "birth.date":"Birthdate",
+  "gender":"Gender",
+  "gender.female":"Female",
+  "gender.male":"Male",
+  "gender.other":"Other",
+  "location":"Location",
+  "save":"Save",
+  "skills":"Skills",
+  "added.skills":"Added skills"
 }

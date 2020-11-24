@@ -39,21 +39,25 @@ const Settings = () => {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const steps = ["Select your tastes", "Select your skills", "successful"];
+  const steps = [t("profile.setting"), t("select.skills"), t("successful")];
 
   const handleFinish = () => {
     history.push("/");
   };
 
-  const handleClose = () => {
-    setSnackBar({ ...snackBar, show: false });
+  const handleSnackBarByComponent = (severity, message) => {
+    setSnackBar({ ...snackBar, show: true, severity, message });
+  };
+
+  const handleCloseSnackBar = () => {
+    setSnackBar({ ...snackBar, show: false, severity: "error" });
   };
 
   const handleChangeGender = (event) => {
     setGender(event.target.value);
   };
 
-  const handleChecked = () => {
+  const handleGeolocationChecked = () => {
     setChecked(!checked);
     if ("geolocation" in navigator) {
       if (!checked) {
@@ -65,7 +69,14 @@ const Settings = () => {
         });
       }
     } else {
-      console.info("geolocation not available");
+      setTimeout(() => {
+        setSnackBar({
+          ...snackBar,
+          message: t("geolocation.warning"),
+          show: true,
+          severity: "warning",
+        });
+      }, 2000);
     }
   };
 
@@ -135,18 +146,20 @@ const Settings = () => {
               gender={gender}
               handleChangeGender={handleChangeGender}
               checked={checked}
-              handleChecked={handleChecked}
+              handleGeolocationChecked={handleGeolocationChecked}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
             />
           )}
 
-          {activeStep === 1 && <Skills saveSkills={saveSkills} />}
+          {activeStep === 1 && (
+            <Skills saveSkills={saveSkills} handleSnackBar={handleSnackBarByComponent} />
+          )}
 
           {activeStep === 2 && <Successful finish={handleFinish} />}
         </Container>
       </div>
-      <SnackBar snackBar={snackBar} handleClose={handleClose} />
+      <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
       <BackdropSpinner isLoading={isLoading} />
     </>
   );

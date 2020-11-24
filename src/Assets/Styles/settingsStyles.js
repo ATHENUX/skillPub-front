@@ -10,12 +10,14 @@ export const useSettingsStyles = makeStyles((theme) => ({
   cardContent: {
     textAlign: "center",
   },
-  button: {
+  spacing: {
+    margin: theme.spacing(1),
+  },
+  spacingTop: {
     marginTop: theme.spacing(1),
   },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+  spacingBottom: {
+    marginBottom: theme.spacing(2),
   },
   formStyle: {
     padding: "20px",
@@ -24,10 +26,7 @@ export const useSettingsStyles = makeStyles((theme) => ({
     alignItems: "center",
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "25ch",
-    },
-    "& .MuiInputBase-root": {
-      borderRadius: "30px 30px",
+      width: "15em",
     },
   },
   constrastCard: {
@@ -43,9 +42,6 @@ export const useSettingsStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
-  },
-  skills: {
-    margin: theme.spacing(1),
   },
   dialogContent: {
     maxHeight: "100em",

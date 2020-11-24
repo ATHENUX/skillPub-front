@@ -9,10 +9,13 @@ import DialogAptitudes from "./DialogAptitudes";
 import BackdropSpinner from "Components/spinner/BackdropSpinner";
 import RegularSpinner from "Components/spinner/RegularSpinner";
 
+//i18n
+import { useTranslation } from "react-i18next";
+
 //axios
 import axios from "axiosConfig";
 
-const Skills = ({ saveSkills }) => {
+const Skills = ({ saveSkills, handleSnackBar }) => {
   const [categories, setCategories] = useState([]);
   const classes = useSettingsStyles();
   const [open, setOpen] = useState(false);
@@ -20,21 +23,27 @@ const Skills = ({ saveSkills }) => {
   const [skills, setSkills] = useState([]);
   const [isLoadingBackdrop, setIsLoadingBackdrop] = useState(false);
   const [isLoadingRegular, setIsLoadingRegular] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    setIsLoadingRegular(true);
-    (async () => {
-      const res = await axios.get("/api/categories");
-      if (res.data.success) {
-        setCategories(res.data.categories);
-      } else {
-        console.error("error");
-      }
+    try {
+      setIsLoadingRegular(true);
+      (async () => {
+        const res = await axios.get("/api/categories");
+        if (res.data.success) {
+          setCategories(res.data.categories);
+        } else {
+          handleSnackBar("error", t("internal.server.error.title"));
+        }
+        setIsLoadingRegular(false);
+      })();
+    } catch (error) {
       setIsLoadingRegular(false);
-    })();
-  }, [setCategories]);
+      handleSnackBar("error", t("internal.server.error.title"));
+    }
+  }, [setCategories, handleSnackBar, t]);
 
-  const handleClickOpen = async (id) => {
+  const handleClickOpenDialog = async (id) => {
     try {
       setIsLoadingBackdrop(true);
       const res = await axios.post(
@@ -46,7 +55,7 @@ const Skills = ({ saveSkills }) => {
         setAptitudes(res.data.aptitudes);
       }
     } catch (error) {
-      console.log("error: ", error);
+      handleSnackBar("error", t("internal.server.error.title"));
     }
     setIsLoadingBackdrop(false);
     setOpen(true);
@@ -58,15 +67,12 @@ const Skills = ({ saveSkills }) => {
 
   const handleAddSkills = (name, id) => {
     const validate = skills.find((element) => element.id === id);
-
     if (validate === undefined) {
-      const add = skills;
-      add.push({ name, id });
-      setSkills(add);
+      setSkills([...skills, { name, id }]);
     }
   };
 
-  const handleDeleteSkills = (id) => {
+  const handleRemoveSkills = (id) => {
     const values = skills.filter((element) => element.id !== id);
     setSkills(values);
   };
@@ -75,18 +81,19 @@ const Skills = ({ saveSkills }) => {
     <>
       <Card elevation={0}>
         <CardContent className={classes.cardContent}>
-          <div>
-            <Typography>Skills</Typography>
+          <div className={classes.spacingBottom}>
+            <Typography>{t("skills")}</Typography>
             <Divider />
           </div>
+
           <RegularSpinner isLoading={isLoadingRegular}>
             <div className={classes.skillsContent}>
               {categories.map((category, id) => (
                 <Button
                   key={id}
                   variant="contained"
-                  className={classes.skills}
-                  onClick={() => handleClickOpen(category._id)}
+                  className={classes.spacing}
+                  onClick={() => handleClickOpenDialog(category._id)}
                 >
                   {category.name}
                 </Button>
@@ -97,7 +104,7 @@ const Skills = ({ saveSkills }) => {
           {skills.length !== 0 && (
             <div>
               <div>
-                <Typography>Added skills</Typography>
+                <Typography>{t("added.skills")}</Typography>
                 <Divider />
               </div>
 
@@ -105,15 +112,15 @@ const Skills = ({ saveSkills }) => {
                 {skills.map((skill, id) => (
                   <Chip
                     key={id}
-                    className={classes.skills}
+                    className={classes.spacing}
                     label={skill.name}
-                    onDelete={() => handleDeleteSkills(skill.id)}
+                    onDelete={() => handleRemoveSkills(skill.id)}
                   />
                 ))}
               </div>
 
               <Button variant="contained" color="primary" onClick={() => saveSkills(skills)}>
-                save
+                {t("save")}
               </Button>
             </div>
           )}
