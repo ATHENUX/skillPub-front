@@ -7,13 +7,13 @@ const SnackBar = ({ snackBar, handleClose }) => {
     <Snackbar
       open={snackBar.show}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "left",
+        vertical: snackBar.vertical,
+        horizontal: snackBar.horizontal,
       }}
       autoHideDuration={6000}
       onClose={handleClose}
     >
-      <MuiAlert elevation={6} variant="filled" severity="error">
+      <MuiAlert elevation={6} variant="filled" severity={snackBar.severity}>
         {snackBar.message}
       </MuiAlert>
     </Snackbar>

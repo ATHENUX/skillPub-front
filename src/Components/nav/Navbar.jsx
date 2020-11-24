@@ -16,7 +16,8 @@ const Navbar = (props) => {
   if (
     location.pathname === "/access" ||
     location.pathname === "/404" ||
-    location.pathname === "/500"
+    location.pathname === "/500" ||
+    location.pathname === "/settings"
   ) {
     return null;
   }

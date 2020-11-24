@@ -8,6 +8,7 @@ import getTheme from "theme/MaterialUi";
 import Home from "pages/Home";
 import Access from "pages/Access";
 import NotFound from "pages/NotFound";
+import Settings from "pages/Settings";
 
 //components
 import Navbar from "Components/nav/Navbar";
@@ -24,6 +25,7 @@ const App = ({ mode }) => {
         <Navbar />
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
+          <Route exact path="/settings" component={Settings} />
           <Route exact path="/access" component={Access} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="*">
