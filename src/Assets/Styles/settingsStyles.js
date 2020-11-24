@@ -39,4 +39,20 @@ export const useSettingsStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  skillsContent: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  skills: {
+    margin: theme.spacing(1),
+  },
+  dialogContent: {
+    maxHeight: "100em",
+    display: "flex",
+    flexWrap: "wrap",
+    "& .MuiButton-root": {
+      margin: ".5em",
+    },
+  },
 }));
