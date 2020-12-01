@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, fade } from "@material-ui/core";
 
 export const usePostStyles = makeStyles((theme) => ({
   paper: {
@@ -42,9 +42,18 @@ export const usePostStyles = makeStyles((theme) => ({
     maxWidth: 450,
     height: 250,
   },
+  hideGridList: {
+    display: "none",
+  },
   titleBar: {
-    background:
-      "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-      "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    backgroundColor: "transparent",
+    padding: 5,
+  },
+  closeIcon: {
+    color: "white",
+    backgroundColor: fade(theme.palette.common.black, 0.8),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.black, 0.6),
+    },
   },
 }));

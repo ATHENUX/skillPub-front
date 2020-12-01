@@ -5,6 +5,7 @@ import {
   Grid,
   GridList,
   GridListTile,
+  GridListTileBar,
   Avatar,
   TextField,
   Button,
@@ -12,8 +13,10 @@ import {
   IconButton,
 } from "@material-ui/core";
 import ImageIcon from "@material-ui/icons/Image";
+import CloseIcon from "@material-ui/icons/Close";
 
 import RegularSpinner from "Components/spinner/RegularSpinner";
+import SnackBar from "Components/SnackBar";
 
 import { usePostStyles } from "Assets/Styles/postsStyles";
 
@@ -23,29 +26,58 @@ import axios from "axiosConfig";
 //react-form
 import { useForm } from "react-hook-form";
 
+import { useTranslation } from "react-i18next";
+
 const AddPost = () => {
   const classes = usePostStyles();
   const [isLoading, setIsLoading] = useState(false);
   const [previewImages, setPreviewImages] = useState([]);
+  // Snackbar
+  const initialSnackBarProps = {
+    show: false,
+    message: "",
+    vertical: "top",
+    horizontal: "left",
+    severity: "error",
+  };
+  const [snackBar, setSnackBar] = useState(initialSnackBarProps);
   const { register, handleSubmit, errors } = useForm();
+
+  const { t } = useTranslation();
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
 
-    Promise.all(
-      files.map((file) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.addEventListener("load", (ev) => {
-            resolve(ev.target.result);
+    if (files.length < 6) {
+      Promise.all(
+        files.map((file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener("load", (ev) => {
+              resolve(ev.target.result);
+            });
+            reader.addEventListener("error", reject);
+            reader.readAsDataURL(file);
           });
-          reader.addEventListener("error", reject);
-          reader.readAsDataURL(file);
-        });
-      })
-    )
-      .then((images) => setPreviewImages(images))
-      .catch((error) => console.log(error));
+        })
+      )
+        .then((images) => setPreviewImages(images))
+        .catch((error) => console.log(error));
+    } else {
+      initialSnackBarProps.message = t("maximum.files.supported");
+      initialSnackBarProps.severity = "info";
+      setSnackBar({
+        ...initialSnackBarProps,
+        show: true,
+      });
+    }
+  };
+
+  const handleDeselectImage = (selectedImage) => {
+    const imageIndex = previewImages.indexOf(selectedImage);
+    const newPreviewImages = previewImages;
+    newPreviewImages.splice(imageIndex, 1);
+    setPreviewImages([...newPreviewImages]);
   };
 
   const handleAddPost = async (data) => {
@@ -63,16 +95,40 @@ const AddPost = () => {
     try {
       setIsLoading(true);
       const res = await axios.post("/api/posts", formData, config);
-      console.log(res.data);
-      setIsLoading(false);
-      const { success, message, post } = res.data;
+      let { success, message, post } = res.data;
       if (success) {
-        console.log("Post created in database");
+        const secondRes = await axios.put("/api/updatePostList", { _id: post._id }, config);
+        success = secondRes.data.success;
+        message = secondRes.data.message;
+        if (message === "Pushed post list") {
+          initialSnackBarProps.message = t("post.created");
+          initialSnackBarProps.severity = "success";
+        } else {
+          initialSnackBarProps.message = t("password.message.error");
+        }
+      } else if (message === "There's a file which extension is not valid") {
+        initialSnackBarProps.message = t("files.supported");
+      } else if (message === "File too large") {
+        initialSnackBarProps.message = t("file.too.large");
+      } else {
+        initialSnackBarProps.message = t("password.message.error");
       }
+      setIsLoading(false);
+      setPreviewImages([]);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+      setPreviewImages([]);
+      initialSnackBarProps.message = t("internal.server.error.title");
+      console.log(error.message);
     }
+    setSnackBar({
+      ...initialSnackBarProps,
+      show: true,
+    });
+  };
+
+  const handleClose = () => {
+    setSnackBar(initialSnackBarProps);
   };
   return (
     <>
@@ -95,31 +151,36 @@ const AddPost = () => {
                   inputRef={register({
                     required: { value: true, message: "Post body is required" },
                   })}
-                  error={Boolean(errors?.postBody)}
+                  error={Boolean(errors?.bodyContent)}
                 />
               </Grid>
               <Grid item xs={12}>
-                {previewImages && (
-                  <div className={classes.root}>
-                    <GridList cellHeight={200} className={classes.gridList} cols={2}>
+                <div className={previewImages.length > 0 ? classes.root : classes.hideGridList}>
+                  {previewImages && (
+                    <GridList cellHeight={200} cols={2} className={classes.gridList}>
                       {previewImages.map((selectedImage, index) => (
                         <GridListTile key={index} cols={1}>
                           <img src={selectedImage} alt={selectedImage} />
+                          <GridListTileBar
+                            actionPosition="right"
+                            titlePosition="top"
+                            className={classes.titleBar}
+                            actionIcon={
+                              <IconButton
+                                className={classes.closeIcon}
+                                size="small"
+                                onClick={() => handleDeselectImage(selectedImage)}
+                              >
+                                <CloseIcon fontSize="inherit" />
+                              </IconButton>
+                            }
+                          />
                         </GridListTile>
                       ))}
                     </GridList>
-                  </div>
-                )}
+                  )}
+                </div>
               </Grid>
-
-              {/* <Grid container item xs={12} spacing={2} justify="space-evenly">
-                {previewImages.map((selectedImage, index) => (
-                  <Grid key={index} item xs={6}>
-                    <img src={selectedImage} alt={selectedImage} style={{ height: 200 }} />
-                  </Grid>
-                ))}
-              </Grid> */}
-
               <Grid item xs={12} className={classes.paperFooter}>
                 <Divider />
                 <div className={classes.postButtons}>
@@ -151,6 +212,7 @@ const AddPost = () => {
           </form>
         </RegularSpinner>
       </Paper>
+      <SnackBar snackBar={snackBar} handleClose={handleClose} />
     </>
   );
 };
