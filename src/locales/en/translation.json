@@ -66,5 +66,9 @@
   "unfollow":"Unfollow",
   "follow":"Follow",
   "follower":"Follower",
-  "following":"Following"
+  "following":"Following",
+  "maximum.files.supported": "Maximum files supported up to 5",
+  "files.supported": "Files supported .jpg, .png, .jpeg, .gif",
+  "post.created": "Post has been created",
+  "file.too.large": "There's a file that's too large"
 }

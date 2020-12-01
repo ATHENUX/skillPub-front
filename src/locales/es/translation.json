@@ -66,5 +66,9 @@
   "unfollow":"Dejar de seguir",
   "follow":"Seguir",
   "follower":"Seguidores",
-  "following":"Siguiendo"
+  "following":"Siguiendo",
+  "maximum.files.supported": "El maximo de archivos soportados es de 5",
+  "files.supported": "Archivos soportados .jpg, .png, .jpeg, .gif",
+  "post.created": "El post ha sido creado",
+  "file.too.large": "Hay una imagen que es muy pesada"
 }
