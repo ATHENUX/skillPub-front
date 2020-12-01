@@ -9,6 +9,7 @@ export default makeStyles((theme) =>
       marginTop: 20,
     },
     middle: {
+      maxWidth: 600,
       minWidth: 600,
     },
     btn: {
