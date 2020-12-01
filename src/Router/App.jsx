@@ -1,4 +1,11 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+
+//redux
+import { getUserData } from "Redux/Reducers/User";
+
+//hooks
+import getUser from "helpers/getUser";
 
 //material ui
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
@@ -18,7 +25,11 @@ import Navbar from "Components/nav/Navbar";
 import { connect } from "react-redux";
 import PrivateRoute from "./PrivateRoute";
 
-const App = ({ mode }) => {
+const App = ({ mode, getUserData }) => {
+  useEffect(() => {
+    getUser(getUserData);
+  }, [getUserData]);
+
   return (
     <Router>
       <ThemeProvider theme={getTheme(mode)}>
@@ -26,7 +37,7 @@ const App = ({ mode }) => {
         <Navbar />
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute exact path="/Profile" component={Profile} />
+          <PrivateRoute exact path="/Profile/:userID" component={Profile} />
           <Route exact path="/settings" component={Settings} />
           <Route exact path="/access" component={Access} />
           <Route exact path="/404" component={NotFound} />
@@ -43,4 +54,8 @@ const mapStateToProps = (state) => ({
   mode: state.ThemeMode,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  getUserData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

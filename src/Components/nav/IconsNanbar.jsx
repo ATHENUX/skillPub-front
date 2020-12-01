@@ -5,7 +5,10 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
-const IconsNanbar = () => {
+//redux
+import { connect } from "react-redux";
+
+const IconsNanbar = ({ user }) => {
   return (
     <>
       <IconButton aria-label="show 4 new mails" color="inherit">
@@ -22,7 +25,7 @@ const IconsNanbar = () => {
         aria-label="show 4 new mails"
         color="inherit"
         component={RouterLink}
-        to="/Profile"
+        to={`/Profile/${user._id}`}
       >
         <AccountCircleIcon />
       </IconButton>
@@ -30,4 +33,8 @@ const IconsNanbar = () => {
   );
 };
 
-export default IconsNanbar;
+const mapStateToProps = (state) => ({
+  user: state.User,
+});
+
+export default connect(mapStateToProps)(IconsNanbar);

@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+//redux
+import { getUserData } from "Redux/Reducers/User";
+
+//hooks
+import getUser from "helpers/getUser";
+
 //material ui
 import {
   Typography,
@@ -30,7 +36,10 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const SignIn = ({ changeAccess }) => {
+//react & redux
+import { connect } from "react-redux";
+
+const SignIn = ({ changeAccess, getUserData }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
@@ -56,6 +65,7 @@ const SignIn = ({ changeAccess }) => {
       const { success, token, message } = res.data;
       if (success) {
         localStorage.setItem("session", token);
+        await getUser(getUserData);
         return history.push("/");
       } else {
         if (message === "Email not found") {
@@ -161,4 +171,8 @@ const SignIn = ({ changeAccess }) => {
   );
 };
 
-export default SignIn;
+const mapDispatchToProps = {
+  getUserData,
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);

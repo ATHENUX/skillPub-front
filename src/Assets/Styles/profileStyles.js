@@ -29,11 +29,38 @@ export const useProfileStyles = makeStyles((theme) =>
       animation: "$secondAvatar 2s",
       animationFillMode: "forwards",
     },
+    skeletonAvatar: {
+      position: "absolute",
+      top: "15em!important",
+      left: theme.spacing(5),
+      zIndex: "3",
+    },
+    seconSkeletonAvatar: {
+      position: "fixed",
+      top: "5.5em!important",
+      left: theme.spacing(5),
+      zIndex: "3",
+      opacity: 0,
+      visibility: "hidden",
+    },
+    secondHiddenSkeletonAvatar: {
+      visibility: "visible",
+    },
+    marginRight: {
+      marginRight: theme.spacing(1),
+    },
+
     marginTop: {
       marginTop: "1em",
     },
     btn: {
       marginLeft: "45%",
+    },
+    borderRadius: {
+      borderRadius: "50px",
+    },
+    space: {
+      marginTop: theme.spacing(6),
     },
     bannerContent: {
       width: "100%",

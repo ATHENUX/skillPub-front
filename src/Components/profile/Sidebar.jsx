@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 //material ui
@@ -13,8 +14,60 @@ import {
 } from "@material-ui/core";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 
-const Sidebar = ({ isFixed }) => {
+//components
+import SnackBar from "Components/SnackBar";
+
+//axios
+import axios from "axiosConfig";
+
+//redux
+import { connect } from "react-redux";
+
+const Sidebar = ({ isFixed, user, userLoggedIn }) => {
+  const [snackBar, setSnackBar] = useState({
+    show: false,
+    message: "",
+    vertical: "top",
+    horizontal: "left",
+    severity: "error",
+  });
   const classes = useProfileStyles();
+  const [iAmFollowing, setIAmFollowing] = useState(false);
+
+  useEffect(() => {
+    const following = userLoggedIn?.following?.find((id) => id === user._id);
+    setIAmFollowing(Boolean(following));
+  }, [user, userLoggedIn]);
+
+  const handleFollow = async () => {
+    const res = await axios.post(
+      "/api/follow",
+      { id: user._id },
+      { headers: { auth: localStorage.getItem("session") } }
+    );
+    if (res.data.success) {
+      setIAmFollowing(true);
+    } else {
+      setSnackBar({ ...snackBar, show: true, message: "error interno" });
+    }
+  };
+
+  const handleUnfollow = async () => {
+    const res = await axios.post(
+      "/api/unfollow",
+      { id: user._id },
+      { headers: { auth: localStorage.getItem("session") } }
+    );
+    if (res.data.success) {
+      setIAmFollowing(false);
+    } else {
+      setSnackBar({ ...snackBar, show: true, message: "error interno" });
+    }
+  };
+
+  const handleCloseSnackBar = () => {
+    setSnackBar({ ...snackBar, show: false, severity: "error" });
+  };
 
   return (
     <Hidden xsDown>
@@ -23,77 +76,104 @@ const Sidebar = ({ isFixed }) => {
         className={`${classes.large} ${classes.firstAvatar} ${
           isFixed ? classes.firstHiddenAvatar : ""
         } `}
-        src="https://i.pinimg.com/originals/89/34/fe/8934fe9034e62c3f9ef4f02eea2c56ab.png"
-      />
+        src={user?.avatar}
+      >
+        {user?.firstName[0]}
+      </Avatar>
 
       <Avatar
         alt="avatar"
         className={`${classes.secondAvatar} ${isFixed ? classes.secondHiddenAvatar : ""} `}
-        src="https://i.pinimg.com/originals/89/34/fe/8934fe9034e62c3f9ef4f02eea2c56ab.png"
-      />
+        src={user?.avatar}
+      >
+        {user?.firstName[0]}
+      </Avatar>
+
       <Card className={`${classes.sidebar} ${isFixed ? classes.fixedSidebar : ""} `} elevation={0}>
         <CardContent>
-          <Button color="primary" variant="contained" className={classes.btn}>
-            Follow
-          </Button>
+          {user?._id !== userLoggedIn?._id && (
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.btn}
+              onClick={iAmFollowing ? handleUnfollow : handleFollow}
+            >
+              {iAmFollowing ? "Unfollow" : "Follow"}
+            </Button>
+          )}
 
-          <Typography variant="h6" className={classes.marginTop}>
-            Juan Pablo Agudelo Castro
+          <Typography
+            variant="h6"
+            className={`${classes.marginTop} ${
+              user?._id === userLoggedIn?._id ? classes.space : ""
+            }`}
+          >
+            {user.firstName + " " + user.lastName}
           </Typography>
-
           <div>
-            <Typography>Profile description:</Typography>
-            <Typography variant="body1" className={classes.textSize}>
-              This is the profile's description
-            </Typography>
-            <Typography className={classes.text}>
-              Contact:
-              <Typography component="strong" color="primary" className={classes.text}>
-                3445453453454
-              </Typography>
-            </Typography>
+            {user?.description && (
+              <div>
+                <Typography>Profile description:</Typography>
+                <Typography variant="body1" className={classes.textSize}>
+                  {user.description}
+                </Typography>
+              </div>
+            )}
 
-            <Typography className={classes.text}>
-              Address:
-              <Typography component="strong" color="primary" className={classes.text}>
-                Carrera 344 # 344- 544
+            {user?.phone && (
+              <Typography className={classes.text}>
+                Contact:
+                <Typography component="strong" color="primary" className={classes.text}>
+                  {user?.phone}
+                </Typography>
               </Typography>
-            </Typography>
+            )}
+
+            {user?.adress && (
+              <Typography className={classes.text}>
+                Address:
+                <Typography component="strong" color="primary" className={classes.text}>
+                  {user?.adress}
+                </Typography>
+              </Typography>
+            )}
           </div>
           <Divider />
-
           <div className={classes.contentFollowers}>
             <Typography>
               Follower:
               <Typography component={RouterLink} color="primary" className={classes.text} to="/">
-                123K
+                {user?.follower?.length}
               </Typography>
             </Typography>
             <Divider orientation="vertical" flexItem />
             <Typography>
               Following:
               <Typography component={RouterLink} color="primary" className={classes.text} to="/">
-                100k
+                {user?.following?.length}
               </Typography>
             </Typography>
           </div>
-
-          <div>
-            <Divider className={classes.marginTop} />
-            <Typography>Skills</Typography>
-            <div className={classes.contentSkills}>
-              <Chip label="python" className={classes.skill} />
-              <Chip label="react" className={classes.skill} />
-              <Chip label="laravel" className={classes.skill} />
-              <Chip label="javascript" className={classes.skill} />
-              <Chip label="go" className={classes.skill} />
-              <Chip label="C" className={classes.skill} />
+          {user?.listOfAptitudes?.length !== 0 && (
+            <div>
+              <Divider className={classes.marginTop} />
+              <Typography>Skills</Typography>
+              <div className={classes.contentSkills}>
+                {user?.listOfAptitudes?.map((skill) => (
+                  <Chip label={skill.name} key={skill._id} className={classes.skill} />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </CardContent>
       </Card>
+      <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </Hidden>
   );
 };
 
-export default Sidebar;
+const mapStateToProps = (state) => ({
+  userLoggedIn: state.User,
+});
+
+export default connect(mapStateToProps)(Sidebar);
