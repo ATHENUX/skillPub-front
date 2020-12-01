@@ -1,7 +1,26 @@
 const initialState = {
-  name: "",
-  lastName: "",
+  Follower: [],
+  Following: [],
+  active: true,
+  createdAt: "",
+  dateOfBirth: "",
+  email: "",
   firstName: "",
+  follower: [],
+  following: [],
+  gender: "M",
+  groupsList: [],
+  lastName: "",
+  listOfAptitudes: [],
+  location: { latitude: 0, longitude: 0 },
+  password: "",
+  phone: "",
+  postsList: [],
+  savedposts: [],
+  sharedPosts: [],
+  updatedAt: "",
+  __v: 0,
+  _id: "",
 };
 
 //management of the type of actions
@@ -12,7 +31,6 @@ const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_USER_DATA:
       return payload;
-
     default:
       return state;
   }

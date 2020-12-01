@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+//redux
+import { getUserData } from "Redux/Reducers/User";
+
+//hooks
+import getUser from "helpers/getUser";
+
 //material ui
 import { Typography, TextField, Button, Hidden } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
@@ -20,7 +26,10 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const SignUp = ({ changeAccess }) => {
+//react & redux
+import { connect } from "react-redux";
+
+const SignUp = ({ changeAccess, getUserData }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
@@ -46,6 +55,7 @@ const SignUp = ({ changeAccess }) => {
       if (success) {
         localStorage.setItem("session", token);
         //redirect to "create initial settings"
+        getUser(getUserData);
         return history.push("/settings");
       } else {
         if (message === "Email is already registered") {
@@ -131,4 +141,8 @@ const SignUp = ({ changeAccess }) => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = {
+  getUserData,
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
