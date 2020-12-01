@@ -56,5 +56,15 @@
   "location":"Ubicación",
   "save":"Guardar",
   "skills":"Habilidades",
-  "added.skills":"Habilidades añadidas"
+  "added.skills":"Habilidades añadidas",
+  "posts":"Publicaciones",
+  "edit.profile":"Editar perfil",
+  "profile.descripcion":"Descripción del perfil",
+  "contact":"Contacto",
+  "adress":"Direccion",
+  "favorites":"Favoritos",
+  "unfollow":"Dejar de seguir",
+  "follow":"Seguir",
+  "follower":"Seguidores",
+  "following":"Siguiendo"
 }

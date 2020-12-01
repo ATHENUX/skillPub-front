@@ -56,5 +56,15 @@
   "location":"Location",
   "save":"Save",
   "skills":"Skills",
-  "added.skills":"Added skills"
+  "added.skills":"Added skills",
+  "posts":"Posts",
+  "edit.profile":"Edit profile",
+  "profile.descripcion":"Profile description",
+  "contact":"Contact",
+  "adress":"Adress",
+  "favorites":"Favorites",
+  "unfollow":"Unfollow",
+  "follow":"Follow",
+  "follower":"Follower",
+  "following":"Following"
 }

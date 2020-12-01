@@ -14,6 +14,9 @@ import {
 } from "@material-ui/core";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 
+//i18n
+import { useTranslation } from "react-i18next";
+
 //components
 import SnackBar from "Components/SnackBar";
 
@@ -31,8 +34,9 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
     horizontal: "left",
     severity: "error",
   });
-  const classes = useProfileStyles();
   const [iAmFollowing, setIAmFollowing] = useState(false);
+  const classes = useProfileStyles();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const following = userLoggedIn?.following?.find((id) => id === user._id);
@@ -48,7 +52,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
     if (res.data.success) {
       setIAmFollowing(true);
     } else {
-      setSnackBar({ ...snackBar, show: true, message: "error interno" });
+      setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
     }
   };
 
@@ -61,7 +65,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
     if (res.data.success) {
       setIAmFollowing(false);
     } else {
-      setSnackBar({ ...snackBar, show: true, message: "error interno" });
+      setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
     }
   };
 
@@ -98,7 +102,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
               className={classes.btn}
               onClick={iAmFollowing ? handleUnfollow : handleFollow}
             >
-              {iAmFollowing ? "Unfollow" : "Follow"}
+              {iAmFollowing ? t("unfollow") : t("follow")}
             </Button>
           )}
 
@@ -113,7 +117,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
           <div>
             {user?.description && (
               <div>
-                <Typography>Profile description:</Typography>
+                <Typography>{t("profile.description")}:</Typography>
                 <Typography variant="body1" className={classes.textSize}>
                   {user.description}
                 </Typography>
@@ -122,7 +126,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
 
             {user?.phone && (
               <Typography className={classes.text}>
-                Contact:
+                {t("contact")}:
                 <Typography component="strong" color="primary" className={classes.text}>
                   {user?.phone}
                 </Typography>
@@ -131,7 +135,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
 
             {user?.adress && (
               <Typography className={classes.text}>
-                Address:
+                {t("address")}:
                 <Typography component="strong" color="primary" className={classes.text}>
                   {user?.adress}
                 </Typography>
@@ -141,14 +145,14 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
           <Divider />
           <div className={classes.contentFollowers}>
             <Typography>
-              Follower:
+              {t("follower")}:
               <Typography component={RouterLink} color="primary" className={classes.text} to="/">
                 {user?.follower?.length}
               </Typography>
             </Typography>
             <Divider orientation="vertical" flexItem />
             <Typography>
-              Following:
+              {t("following")}:
               <Typography component={RouterLink} color="primary" className={classes.text} to="/">
                 {user?.following?.length}
               </Typography>
@@ -157,7 +161,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
           {user?.listOfAptitudes?.length !== 0 && (
             <div>
               <Divider className={classes.marginTop} />
-              <Typography>Skills</Typography>
+              <Typography>{t("skills")}</Typography>
               <div className={classes.contentSkills}>
                 {user?.listOfAptitudes?.map((skill) => (
                   <Chip label={skill.name} key={skill._id} className={classes.skill} />

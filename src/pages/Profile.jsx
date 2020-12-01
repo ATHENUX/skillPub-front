@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 
+//i18n
+import { useTranslation } from "react-i18next";
+
 //componenst
 import Sidebar from "Components/profile/Sidebar";
 import SkeletonSidebar from "Components/profile/SkeletonSidebar";
@@ -29,6 +32,7 @@ const Profile = () => {
   const [user, setUser] = useState({});
   const ref = useRef(null);
   const { userID } = useParams();
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -51,10 +55,10 @@ const Profile = () => {
           setloading(true);
         }
       } catch (error) {
-        setSnackBar({ ...snackBar, show: true, message: "error interno" });
+        setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
       }
     })();
-  }, [userID, snackBar]);
+  }, [userID, snackBar, t]);
 
   const handleScroll = () => {
     if (ref.current) {
