@@ -14,8 +14,8 @@ const Previewimages = ({ previewImages, handleDeselectImage }) => {
     if (previewImages.length === 4 || (previewImages.length === 3) | (previewImages.length === 1)) {
       cal.push(1, 1, 2, 2);
     }
-    if (previewImages.length === 4 || (previewImages.length === 3) | (previewImages.length === 1)) {
-      cal.push(1, 1, 2, 2);
+    if (previewImages.length === 5) {
+      cal.push(1, 1, 2, 1, 1);
     }
 
     setCalculate([...cal]);
