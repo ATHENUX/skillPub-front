@@ -1,9 +1,9 @@
 const initialState = "light";
 
-//actions
+//management of the type of actions
 const CHANGE_THEME_MODE = "CHANGE_THEME_MODE";
 
-//reducers
+//reducer
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case CHANGE_THEME_MODE:
@@ -13,7 +13,7 @@ const reducer = (state = initialState, { type, payload }) => {
   }
 };
 
-//action generators
+//acciones
 export const changeThemeMode = (response) => {
   return {
     type: CHANGE_THEME_MODE,
