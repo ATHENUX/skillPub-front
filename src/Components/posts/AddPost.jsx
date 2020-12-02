@@ -1,37 +1,24 @@
 import { useState } from "react";
-//Material-UI
-import {
-  Paper,
-  Grid,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  Avatar,
-  TextField,
-  Button,
-  Divider,
-  IconButton,
-} from "@material-ui/core";
-import ImageIcon from "@material-ui/icons/Image";
-import CloseIcon from "@material-ui/icons/Close";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
 
+//Material-UI
+import { Paper, Grid, Avatar, TextField } from "@material-ui/core";
+import { usePostStyles } from "Assets/Styles/postsStyles";
+
+//components
 import RegularSpinner from "Components/spinner/RegularSpinner";
 import SnackBar from "Components/SnackBar";
+import PreviewImages from "./PreviewImages";
+import PaperFooter from "./PaperFooter";
 
-import { usePostStyles } from "Assets/Styles/postsStyles";
+//i18n
+import { useTranslation } from "react-i18next";
 
 //Axios
 import axios from "axiosConfig";
 
-//react-form
-import { useForm } from "react-hook-form";
-
-import { useTranslation } from "react-i18next";
-
-const AddPost = () => {
-  const classes = usePostStyles();
-  const [isLoading, setIsLoading] = useState(false);
-  const [previewImages, setPreviewImages] = useState([]);
+const AddPost = ({ user }) => {
   // Snackbar
   const initialSnackBarProps = {
     show: false,
@@ -40,9 +27,11 @@ const AddPost = () => {
     horizontal: "left",
     severity: "error",
   };
+  const [isLoading, setIsLoading] = useState(false);
+  const [previewImages, setPreviewImages] = useState([]);
   const [snackBar, setSnackBar] = useState(initialSnackBarProps);
   const { register, handleSubmit, errors } = useForm();
-
+  const classes = usePostStyles();
   const { t } = useTranslation();
 
   const handleFileChange = (e) => {
@@ -130,6 +119,7 @@ const AddPost = () => {
   const handleClose = () => {
     setSnackBar(initialSnackBarProps);
   };
+
   return (
     <>
       <Paper className={classes.paper} variant="outlined">
@@ -137,7 +127,7 @@ const AddPost = () => {
           <form onSubmit={handleSubmit(handleAddPost)}>
             <Grid container>
               <Grid item xs={1}>
-                <Avatar>S</Avatar>
+                <Avatar src={user?.avatar}>{user?.fistName}</Avatar>
               </Grid>
 
               <Grid item xs={11}>
@@ -157,56 +147,15 @@ const AddPost = () => {
               <Grid item xs={12}>
                 <div className={previewImages.length > 0 ? classes.root : classes.hideGridList}>
                   {previewImages && (
-                    <GridList cellHeight={200} cols={2} className={classes.gridList}>
-                      {previewImages.map((selectedImage, index) => (
-                        <GridListTile key={index} cols={1}>
-                          <img src={selectedImage} alt={selectedImage} />
-                          <GridListTileBar
-                            actionPosition="right"
-                            titlePosition="top"
-                            className={classes.titleBar}
-                            actionIcon={
-                              <IconButton
-                                className={classes.closeIcon}
-                                size="small"
-                                onClick={() => handleDeselectImage(selectedImage)}
-                              >
-                                <CloseIcon fontSize="inherit" />
-                              </IconButton>
-                            }
-                          />
-                        </GridListTile>
-                      ))}
-                    </GridList>
+                    <PreviewImages
+                      previewImages={previewImages}
+                      handleDeselectImage={handleDeselectImage}
+                    />
                   )}
                 </div>
               </Grid>
               <Grid item xs={12} className={classes.paperFooter}>
-                <Divider />
-                <div className={classes.postButtons}>
-                  <div>
-                    <input
-                      accept="image/*"
-                      multiple
-                      className={classes.input}
-                      id="icon-button-file"
-                      name="files"
-                      type="file"
-                      ref={register}
-                      onChange={handleFileChange}
-                    />
-                    <label htmlFor="icon-button-file">
-                      <IconButton color="inherit" aria-label="upload picture" component="span">
-                        <ImageIcon />
-                      </IconButton>
-                    </label>
-                  </div>
-                  <div>
-                    <Button variant="contained" color="primary" type="submit">
-                      post
-                    </Button>
-                  </div>
-                </div>
+                <PaperFooter register={register} handleFileChange={handleFileChange} />
               </Grid>
             </Grid>
           </form>
@@ -217,4 +166,8 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+const mapStateToProps = (state) => ({
+  user: state.User,
+});
+
+export default connect(mapStateToProps)(AddPost);

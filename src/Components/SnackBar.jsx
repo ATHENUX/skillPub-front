@@ -1,4 +1,4 @@
-//material ui
+//material-UI
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 

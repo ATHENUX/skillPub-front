@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-
-//redux
 import { getUserData } from "Redux/Reducers/User";
+import { connect } from "react-redux";
+import PrivateRoute from "./PrivateRoute";
 
-//hooks
-import getUser from "helpers/getUser";
-
-//material ui
+//material-UI
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import getTheme from "theme/MaterialUi";
 
@@ -21,9 +18,8 @@ import Profile from "pages/Profile";
 //components
 import Navbar from "Components/nav/Navbar";
 
-//react & redux
-import { connect } from "react-redux";
-import PrivateRoute from "./PrivateRoute";
+//hooks
+import getUser from "helpers/getUser";
 
 const App = ({ mode, getUserData }) => {
   useEffect(() => {

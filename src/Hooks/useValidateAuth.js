@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-//axios
-import axios from "axiosConfig";
-
 //constants
 import { constants } from "constants/constants";
+
+//axios
+import axios from "axiosConfig";
 
 export const useValidateAuth = () => {
   const [isLogged, setIsLogged] = useState(false);

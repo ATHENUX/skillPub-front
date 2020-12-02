@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { connect } from "react-redux";
 
-//material ui
+//material-UI
 import {
   Avatar,
   Card,
@@ -14,17 +15,14 @@ import {
 } from "@material-ui/core";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 
-//i18n
-import { useTranslation } from "react-i18next";
-
 //components
 import SnackBar from "Components/SnackBar";
 
+//i18n
+import { useTranslation } from "react-i18next";
+
 //axios
 import axios from "axiosConfig";
-
-//redux
-import { connect } from "react-redux";
 
 const Sidebar = ({ isFixed, user, userLoggedIn }) => {
   const [snackBar, setSnackBar] = useState({

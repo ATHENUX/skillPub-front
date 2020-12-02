@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-//redux
 import { getUserData } from "Redux/Reducers/User";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
 
-//hooks
-import getUser from "helpers/getUser";
-
-//material ui
+//material-UI
 import { Typography, TextField, Button, Hidden } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 import useCustomStyles from "Assets/Styles/CustomStyles";
-
-//react-form
-import { useForm } from "react-hook-form";
 
 //components
 import Social from "./Social";
@@ -26,8 +20,8 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-//react & redux
-import { connect } from "react-redux";
+//hooks
+import getUser from "helpers/getUser";
 
 const SignUp = ({ changeAccess, getUserData }) => {
   const initialSnackBarProps = {

@@ -1,6 +1,6 @@
 import { useState, forwardRef } from "react";
 
-//material ui
+//material-UI
 import {
   Button,
   Dialog,
@@ -11,29 +11,15 @@ import {
   IconButton,
   useMediaQuery,
   Typography,
-  DialogTitle as MuiDialogTitle,
+  DialogTitle,
 } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import CloseIcon from "@material-ui/icons/Close";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
-import { withStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 
 //i18n
 import { useTranslation } from "react-i18next";
-
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
 
 const newTransition = (props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -47,20 +33,6 @@ const AlertDialogSlide = () => {
   const classes = useAccessStyle();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
-
-  const DialogTitle = withStyles(styles)((props) => {
-    const { children, classes, onClose, ...other } = props;
-    return (
-      <MuiDialogTitle disableTypography className={classes.root} {...other}>
-        <Typography variant="h6">{children}</Typography>
-        {onClose ? (
-          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </MuiDialogTitle>
-    );
-  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -87,8 +59,17 @@ const AlertDialogSlide = () => {
         aria-describedby="alert-dialog-slide-description"
       >
         <div className={classes.modalContainer}>
-          <DialogTitle id="alert-dialog-slide-title" onClose={handleClose}>
-            {t("forgot.password")}
+          <DialogTitle
+            onClose={handleClose}
+            disableTypography
+            className={classes.diealogRecoverPassword}
+          >
+            <Typography variant="h6">{t("forgot.password")}</Typography>
+            {handleClose ? (
+              <IconButton aria-label="close" className={classes.btn} onClick={handleClose}>
+                <CloseIcon />
+              </IconButton>
+            ) : null}
           </DialogTitle>
           <LockIcon color="primary" className={classes.iconModal} />
           <form className={classes.formStyleRecoverPassword}>

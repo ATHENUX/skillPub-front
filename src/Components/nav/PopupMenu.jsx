@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { changeThemeMode } from "Redux/Reducers/ThemeMode";
 
-//material ui
+//material-UI
 import {
   IconButton,
   ListItemText,
@@ -21,10 +23,6 @@ import { StyledMenuItem, StyledMenu } from "Assets/Styles/navbarStyles";
 
 //i18n
 import { useTranslation } from "react-i18next";
-
-//react & redux
-import { connect } from "react-redux";
-import { changeThemeMode } from "Redux/Reducers/ThemeMode";
 
 const CustomizedMenus = ({ changeThemeMode, mode }) => {
   const [anchorEl, setAnchorEl] = useState(null);

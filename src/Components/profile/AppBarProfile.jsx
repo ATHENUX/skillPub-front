@@ -1,4 +1,4 @@
-//material ui
+//material-UI
 import { Card, Divider, Button } from "@material-ui/core";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 

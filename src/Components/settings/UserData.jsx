@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-//material ui
+//material-UI
 import {
   Card,
   CardContent,
@@ -24,9 +25,6 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import DateFnsUtils from "@date-io/moment";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-
-//react-form
-import { useForm } from "react-hook-form";
 
 //i18n
 import { useTranslation } from "react-i18next";

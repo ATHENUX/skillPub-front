@@ -1,17 +1,13 @@
-import useSEO from "Hooks/useSEO";
-
-//styles
+//material-UI
 import useCustomStyles from "Assets/Styles/CustomStyles";
 
-//i18n
-//import { useTranslation } from "react-i18next";
-
+//components
 import AddPost from "Components/posts/AddPost";
 
-// const local = navigator.language
-//Function component
+//hooks
+import useSEO from "Hooks/useSEO";
+
 const Home = () => {
-  //const { t, i18n } = useTranslation()
   const classes = useCustomStyles();
 
   useSEO({

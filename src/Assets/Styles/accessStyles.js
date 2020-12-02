@@ -124,6 +124,16 @@ export const useAccessStyle = makeStyles((theme) =>
     formStylePassword: {
       marginTop: "10px",
     },
+    diealogRecoverPassword: {
+      margin: 0,
+      padding: theme.spacing(2),
+    },
+    btn: {
+      position: "absolute",
+      right: theme.spacing(1),
+      top: theme.spacing(1),
+      color: theme.palette.grey[500],
+    },
     "@keyframes show": {
       "0%, 50%": {
         zIndex: 2,

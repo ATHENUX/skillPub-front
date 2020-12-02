@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-//material ui
+//material-UI
 import { Hidden } from "@material-ui/core";
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
 

@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import useSEO from "Hooks/useSEO";
 
-//hooks
-import useLanguageBrowser from "Hooks/useLanguageBrowser";
-
-//Material ui
+//Material-UI
 import { Container, Card, Grid } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 
@@ -13,7 +9,11 @@ import { useAccessStyle } from "Assets/Styles/accessStyles";
 import SignIn from "Components/access/SignIn";
 import SignUp from "Components/access/SignUp";
 import Overlay from "Components/access/Overlay";
+
+//hooks
+import useSEO from "Hooks/useSEO";
 import { useValidateAuth } from "Hooks/useValidateAuth";
+import useLanguageBrowser from "Hooks/useLanguageBrowser";
 
 const Access = () => {
   const classes = useAccessStyle();

@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-//redux
 import { getUserData } from "Redux/Reducers/User";
+import { connect } from "react-redux";
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-//hooks
-import getUser from "helpers/getUser";
-
-//material ui
+//material-UI
 import { Button } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
-
-//svg
 import google from "Assets/img/svg/google.svg";
 import facebook from "Assets/img/svg/facebook.svg";
 
@@ -24,12 +20,8 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-//react & redux
-import { connect } from "react-redux";
-
-//google & facebook
-import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+//hooks
+import getUser from "helpers/getUser";
 
 const Social = ({ handleopenBackDrop, validateAccess, getUserData }) => {
   const initialSnackBarProps = {

@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+
+//i18n
 import { useTranslation } from "react-i18next";
 
 const useLanguageBrowser = () => {

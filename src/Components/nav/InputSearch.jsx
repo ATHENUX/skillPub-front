@@ -1,4 +1,4 @@
-//material ui
+//material-UI
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";

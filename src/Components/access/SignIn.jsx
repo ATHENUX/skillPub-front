@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-//redux
 import { getUserData } from "Redux/Reducers/User";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
 
-//hooks
-import getUser from "helpers/getUser";
-
-//material ui
+//material-UI
 import {
   Typography,
   TextField,
@@ -21,9 +18,6 @@ import useCustomStyles from "Assets/Styles/CustomStyles";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
-//react-form
-import { useForm } from "react-hook-form";
-
 //components
 import Social from "./Social";
 import RecoverPassword from "./RecoverPassword";
@@ -36,8 +30,8 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-//react & redux
-import { connect } from "react-redux";
+//hooks
+import getUser from "helpers/getUser";
 
 const SignIn = ({ changeAccess, getUserData }) => {
   const initialSnackBarProps = {

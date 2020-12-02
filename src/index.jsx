@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 import "Assets/Styles/index.css";
 import App from "Router/App";
 import reportWebVitals from "./reportWebVitals";
-
-//redux
 import { Provider } from "react-redux";
 import store from "Redux/Store";
 
+//i18n
 import "I18n";
 
 ReactDOM.render(

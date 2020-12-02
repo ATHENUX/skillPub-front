@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-// material ui
+// material-UI
 import { useMediaQuery, useTheme, Stepper, Step, StepLabel, Container } from "@material-ui/core";
 import { useSettingsStyles } from "Assets/Styles/settingsStyles";
-import moment from "moment";
 
 //components
 import StepperuserData from "Components/settings/UserData";
@@ -18,6 +17,9 @@ import { useTranslation } from "react-i18next";
 
 //axios
 import axios from "axiosConfig";
+
+//moment
+import moment from "moment";
 
 const Settings = () => {
   const theme = useTheme();

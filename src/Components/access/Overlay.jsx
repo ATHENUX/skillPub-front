@@ -1,3 +1,4 @@
+//material-UI
 import { Typography, Button } from "@material-ui/core";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 
@@ -31,11 +32,7 @@ const Overlay = ({ changeAccess, handleChangeAccess }) => {
         >
           <Typography variant="h4">{t("welcome.back")}</Typography>
           <p>{t("system.message")}</p>
-          <Button
-            variant="outlined"
-            color="inherit"
-            onClick={() => handleChangeAccess(true)}
-          >
+          <Button variant="outlined" color="inherit" onClick={() => handleChangeAccess(true)}>
             {t("log.in")}
           </Button>
         </div>

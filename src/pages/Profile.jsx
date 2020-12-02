@@ -1,19 +1,19 @@
 import { useRef, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-//material ui
+//material-UI
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 
-//i18n
-import { useTranslation } from "react-i18next";
-
-//componenst
+//componensts
 import Sidebar from "Components/profile/Sidebar";
 import SkeletonSidebar from "Components/profile/SkeletonSidebar";
 import AppBarProfile from "Components/profile/AppBarProfile";
 import Post from "Components/profile/Post";
 import SnackBar from "Components/SnackBar";
+
+//i18n
+import { useTranslation } from "react-i18next";
 
 //axios
 import axios from "axiosConfig";

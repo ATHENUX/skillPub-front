@@ -1,4 +1,4 @@
-//material ui
+//material-UI
 import { AppBar, Toolbar, Typography, Hidden, Divider } from "@material-ui/core";
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
 

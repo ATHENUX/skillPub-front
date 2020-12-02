@@ -1,16 +1,15 @@
-//hooks
-import useSEO from "Hooks/useSEO";
-import useLanguageBrowser from "Hooks/useLanguageBrowser";
+import { Link as RouterLink } from "react-router-dom";
 
-//material ui
+//material-UI
 import { Grid, Typography, Paper, Button, Hidden } from "@material-ui/core";
 import { useErrorPageStyles } from "Assets/Styles/errorPagesStyles";
 
 //i18n
 import { useTranslation } from "react-i18next";
 
-//Router
-import { Link as RouterLink } from "react-router-dom";
+//hooks
+import useSEO from "Hooks/useSEO";
+import useLanguageBrowser from "Hooks/useLanguageBrowser";
 
 const InternalServerError = () => {
   const classes = useErrorPageStyles();

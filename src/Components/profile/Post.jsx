@@ -1,4 +1,4 @@
-//material ui
+//material-UI
 import { useProfileStyles } from "Assets/Styles/profileStyles";
 
 const Post = () => {

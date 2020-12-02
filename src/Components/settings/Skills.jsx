@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-//materiaL UI
+//material-UI
 import { Card, CardContent, Typography, Divider, Button, Chip } from "@material-ui/core";
 import { useSettingsStyles } from "Assets/Styles/settingsStyles";
 

@@ -1,12 +1,11 @@
 import { Link as RouterLink } from "react-router-dom";
-//material ui
+import { connect } from "react-redux";
+
+//material-UI
 import { IconButton, Badge } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-
-//redux
-import { connect } from "react-redux";
 
 const IconsNanbar = ({ user }) => {
   return (
