@@ -6,6 +6,11 @@ export const useProfileStyles = makeStyles((theme) =>
       width: theme.spacing(11),
       height: theme.spacing(11),
     },
+    contentMd: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
     firstAvatar: {
       position: "absolute",
       top: "11em",
@@ -92,7 +97,7 @@ export const useProfileStyles = makeStyles((theme) =>
     contentFollowers: {
       marginTop: ".5em",
       display: "flex",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
     },
     contentSkills: {
       display: "flex",
@@ -111,6 +116,9 @@ export const useProfileStyles = makeStyles((theme) =>
         width: "500px",
         margin: "auto",
       },
+      [theme.breakpoints.down("xs")]: {
+        marginTop: theme.spacing(16),
+      },
     },
     appBarProfile: {
       position: "absolute",
@@ -120,6 +128,13 @@ export const useProfileStyles = makeStyles((theme) =>
       display: "flex",
       "& .MuiButtonBase-root": {
         borderRadius: "0!important",
+      },
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+        left: "0",
+      },
+      [theme.breakpoints.down("xs")]: {
+        flexDirection: "column",
       },
     },
     fixedAppBarProfile: {

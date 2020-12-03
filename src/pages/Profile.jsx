@@ -7,8 +7,11 @@ import { useProfileStyles } from "Assets/Styles/profileStyles";
 
 //componensts
 import Sidebar from "Components/profile/Sidebar";
+import SidebarMd from "Components/profile/SidebarMd";
 import SkeletonSidebar from "Components/profile/SkeletonSidebar";
+import SkeletonSidebarMd from "Components/profile/SkeletonSidebarMd";
 import AppBarProfile from "Components/profile/AppBarProfile";
+import AppBarProfileMd from "Components/profile/AppBarProfileMd";
 import Post from "Components/profile/Post";
 import SnackBar from "Components/SnackBar";
 
@@ -27,6 +30,7 @@ const Profile = () => {
     severity: "error",
   });
   const [isFixed, setIsFixed] = useState(false);
+  const [isFixedMd, setIsFixedMd] = useState(false);
   const [loading, setloading] = useState(false);
   const classes = useProfileStyles();
   const [user, setUser] = useState({});
@@ -36,9 +40,11 @@ const Profile = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollMd);
 
     return () => {
       window.removeEventListener("scroll", () => handleScroll);
+      window.removeEventListener("scroll", () => handleScrollMd);
     };
   }, []);
 
@@ -66,6 +72,12 @@ const Profile = () => {
     }
   };
 
+  const handleScrollMd = () => {
+    if (ref.current) {
+      setIsFixedMd(Boolean(ref.current.getBoundingClientRect().top <= -515));
+    }
+  };
+
   const handleCloseSnackBar = () => {
     setSnackBar({ ...snackBar, show: false, severity: "error" });
   };
@@ -84,7 +96,10 @@ const Profile = () => {
         )}
       </div>
       {loading ? <Sidebar isFixed={isFixed} user={user} /> : <SkeletonSidebar isFixed={isFixed} />}
+      {loading ? <SidebarMd user={user} /> : <SkeletonSidebarMd />}
+
       <AppBarProfile isFixed={isFixed} user={user} />
+      <AppBarProfileMd isFixed={isFixedMd} user={user} />
       <Post />
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>
