@@ -5,16 +5,13 @@ import { useProfileStyles } from "Assets/Styles/profileStyles";
 //i18n
 import { useTranslation } from "react-i18next";
 
-const AppBarProfile = ({ isFixed }) => {
-  const classes = useProfileStyles();
+const AppBarProfileMd = ({ isFixed }) => {
+  const classes = useProfileStyles({ isFixed });
   const { t } = useTranslation();
 
   return (
-    <Hidden mdDown>
-      <Card
-        elevation={0}
-        className={`${classes.appBarProfile} ${isFixed ? classes.fixedAppBarProfile : ""}`}
-      >
+    <Hidden lgUp>
+      <Card elevation={0} className={`${classes.appBarProfile}`}>
         <Button color="primary">{t("posts")}</Button>
         <Divider orientation="vertical" flexItem />
         <Button>{t("edit.profile")}</Button>
@@ -24,5 +21,4 @@ const AppBarProfile = ({ isFixed }) => {
     </Hidden>
   );
 };
-
-export default AppBarProfile;
+export default AppBarProfileMd;

@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const Sidebar = ({ isFixed, user, userLoggedIn }) => {
+const SidebarMd = ({ user, userLoggedIn }) => {
   const [snackBar, setSnackBar] = useState({
     show: false,
     message: "",
@@ -72,46 +72,33 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
   };
 
   return (
-    <Hidden mdDown>
-      <Avatar
-        alt="avatar"
-        className={`${classes.large} ${classes.firstAvatar} ${
-          isFixed ? classes.firstHiddenAvatar : ""
-        } `}
-        src={user?.avatar}
-      >
-        {user?.firstName}
-      </Avatar>
-
-      <Avatar
-        alt="avatar"
-        className={`${classes.secondAvatar} ${isFixed ? classes.secondHiddenAvatar : ""} `}
-        src={user?.avatar}
-      >
-        {user?.firstName}
-      </Avatar>
-
-      <Card className={`${classes.sidebar} ${isFixed ? classes.fixedSidebar : ""} `} elevation={0}>
+    <Hidden lgUp>
+      <Card elevation={0}>
         <CardContent>
-          {user?._id !== userLoggedIn?._id && (
-            <Button
-              color="primary"
-              variant="contained"
-              className={classes.btn}
-              onClick={iAmFollowing ? handleUnfollow : handleFollow}
-            >
-              {iAmFollowing ? t("unfollow") : t("follow")}
-            </Button>
-          )}
+          <div className={`${classes.contentMd}`}>
+            <Avatar alt="avatar" className={`${classes.large}`} src={user?.avatar}>
+              {user?.firstName}
+            </Avatar>
+            {user?._id !== userLoggedIn?._id && (
+              <Button
+                color="primary"
+                variant="contained"
+                className={classes.marginTop}
+                onClick={iAmFollowing ? handleUnfollow : handleFollow}
+              >
+                {iAmFollowing ? t("unfollow") : t("follow")}
+              </Button>
+            )}
 
-          <Typography
-            variant="h6"
-            className={`${classes.marginTop} ${
-              user?._id === userLoggedIn?._id ? classes.space : ""
-            }`}
-          >
-            {user.firstName + " " + user.lastName}
-          </Typography>
+            <Typography
+              variant="h6"
+              className={`${classes.marginTop} ${
+                user?._id === userLoggedIn?._id ? classes.space : ""
+              }`}
+            >
+              {user.firstName + " " + user.lastName}
+            </Typography>
+          </div>
           <div>
             {user?.description && (
               <div>
@@ -141,14 +128,13 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
             )}
           </div>
           <Divider />
-          <div className={classes.contentFollowers}>
+          <div>
             <Typography>
               {t("follower")}:
               <Typography component={RouterLink} color="primary" className={classes.text} to="/">
                 {user?.follower?.length}
               </Typography>
             </Typography>
-            <Divider orientation="vertical" flexItem />
             <Typography>
               {t("following")}:
               <Typography component={RouterLink} color="primary" className={classes.text} to="/">
@@ -178,4 +164,4 @@ const mapStateToProps = (state) => ({
   userLoggedIn: state.User,
 });
 
-export default connect(mapStateToProps)(Sidebar);
+export default connect(mapStateToProps)(SidebarMd);
