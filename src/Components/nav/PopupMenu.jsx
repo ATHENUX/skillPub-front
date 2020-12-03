@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { changeThemeMode } from "Redux/Reducers/ThemeMode";
 
 //material-UI
@@ -26,6 +27,7 @@ import { useTranslation } from "react-i18next";
 
 const CustomizedMenus = ({ changeThemeMode, mode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
   const { t } = useTranslation();
 
   const handleClick = (event) => {
@@ -38,6 +40,12 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
 
   const handleClickTheme = () => {
     changeThemeMode(mode);
+    localStorage.setItem("theme", mode);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("session");
+    history.push("/access");
   };
 
   return (
@@ -90,7 +98,7 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
           </ListItem>
         </StyledMenuItem>
 
-        <StyledMenuItem>
+        <StyledMenuItem onClick={handleLogout}>
           <ListItem component="div">
             <ListItemAvatar>
               <Avatar>
