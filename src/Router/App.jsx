@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import { getUserData } from "Redux/Reducers/User";
 import { connect } from "react-redux";
 import PrivateRoute from "./PrivateRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 //material-UI
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
@@ -23,7 +24,9 @@ import getUser from "helpers/getUser";
 
 const App = ({ mode, getUserData }) => {
   useEffect(() => {
-    getUser(getUserData);
+    (async () => {
+      await getUser(getUserData);
+    })();
   }, [getUserData]);
 
   return (
@@ -34,7 +37,7 @@ const App = ({ mode, getUserData }) => {
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute exact path="/Profile/:userID" component={Profile} />
-          <Route exact path="/settings" component={Settings} />
+          <ProtectedRoute exact path="/settings" component={Settings} />
           <Route exact path="/access" component={Access} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="*">

@@ -1,6 +1,7 @@
 //material-UI
-import { AppBar, Toolbar, Typography, Hidden, Divider } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Link, Hidden, Divider } from "@material-ui/core";
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
+import { Link as RouterLink } from "react-router-dom";
 
 //components
 import PopupMenu from "./PopupMenu";
@@ -16,7 +17,11 @@ const NavBarPrimary = () => {
   return (
     <AppBar position="fixed" color="inherit" elevation={0}>
       <Toolbar>
-        <Typography variant="h6">{t("name.app")}</Typography>
+        <Typography variant="h6">
+          <Link underline="none" component={RouterLink} to="/" color="inherit">
+            {t("name.app")}
+          </Link>
+        </Typography>
 
         <InputSearch />
         <div className={classes.grow} />
