@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { getUserData } from "Redux/Reducers/User";
+import { changeThemeMode } from "Redux/Reducers/ThemeMode";
 import { connect } from "react-redux";
 import PrivateRoute from "./PrivateRoute";
 import ProtectedRoute from "./ProtectedRoute";
@@ -22,12 +23,11 @@ import Navbar from "Components/nav/Navbar";
 //hooks
 import getUser from "helpers/getUser";
 
-const App = ({ mode, getUserData }) => {
+const App = ({ changeThemeMode, mode, getUserData }) => {
   useEffect(() => {
-    (async () => {
-      await getUser(getUserData);
-    })();
-  }, [getUserData]);
+    getUser(getUserData);
+    changeThemeMode(localStorage.getItem("theme"));
+  }, [getUserData, changeThemeMode]);
 
   return (
     <Router>
@@ -55,6 +55,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getUserData,
+  changeThemeMode,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

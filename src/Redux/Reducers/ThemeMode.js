@@ -17,7 +17,7 @@ const reducer = (state = initialState, { type, payload }) => {
 export const changeThemeMode = (response) => {
   return {
     type: CHANGE_THEME_MODE,
-    payload: response === "dark" ? "light" : "dark",
+    payload: response === "light" ? "dark" : "light",
   };
 };
 
