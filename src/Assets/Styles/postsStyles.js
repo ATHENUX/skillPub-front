@@ -56,4 +56,8 @@ export const usePostStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.black, 0.6),
     },
   },
+  avatar: {
+    display: "flex",
+    justifyContent: "center",
+  },
 }));

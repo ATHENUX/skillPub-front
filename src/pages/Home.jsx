@@ -1,5 +1,7 @@
 //material-UI
 import useCustomStyles from "Assets/Styles/CustomStyles";
+import { useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 
 //components
 import AddPost from "Components/posts/AddPost";
@@ -9,6 +11,8 @@ import useSEO from "Hooks/useSEO";
 
 const Home = () => {
   const classes = useCustomStyles();
+  const theme = useTheme();
+  const watch = useMediaQuery(theme.breakpoints.up("sm"));
 
   useSEO({
     title: "Home",
@@ -17,7 +21,7 @@ const Home = () => {
 
   return (
     <div className={classes.main}>
-      <div className={classes.middle}>
+      <div className={watch ? classes.middle : ""}>
         <AddPost />
       </div>
     </div>
