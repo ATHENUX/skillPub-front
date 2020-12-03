@@ -4,6 +4,7 @@ import { getUserData } from "Redux/Reducers/User";
 import { changeThemeMode } from "Redux/Reducers/ThemeMode";
 import { connect } from "react-redux";
 import PrivateRoute from "./PrivateRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 //material-UI
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
@@ -36,7 +37,7 @@ const App = ({ changeThemeMode, mode, getUserData }) => {
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute exact path="/Profile/:userID" component={Profile} />
-          <Route exact path="/settings" component={Settings} />
+          <ProtectedRoute exact path="/settings" component={Settings} />
           <Route exact path="/access" component={Access} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="*">

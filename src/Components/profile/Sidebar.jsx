@@ -80,7 +80,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
         } `}
         src={user?.avatar}
       >
-        {user?.firstName}
+        {user?.firstName.substring(0, 1)}
       </Avatar>
 
       <Avatar
@@ -88,7 +88,7 @@ const Sidebar = ({ isFixed, user, userLoggedIn }) => {
         className={`${classes.secondAvatar} ${isFixed ? classes.secondHiddenAvatar : ""} `}
         src={user?.avatar}
       >
-        {user?.firstName}
+        {user?.firstName.substring(0, 1)}
       </Avatar>
 
       <Card className={`${classes.sidebar} ${isFixed ? classes.fixedSidebar : ""} `} elevation={0}>

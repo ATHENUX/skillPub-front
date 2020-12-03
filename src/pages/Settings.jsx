@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUserData } from "Redux/Reducers/User";
 
 // material-UI
 import { useMediaQuery, useTheme, Stepper, Step, StepLabel, Container } from "@material-ui/core";
@@ -21,7 +23,7 @@ import axios from "axiosConfig";
 //moment
 import moment from "moment";
 
-const Settings = () => {
+const Settings = ({ getUserData, user }) => {
   const theme = useTheme();
   const orientation = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useSettingsStyles();
@@ -43,8 +45,16 @@ const Settings = () => {
 
   const steps = [t("profile.setting"), t("select.skills"), t("successful")];
 
-  const handleFinish = () => {
-    history.push("/");
+  const handleFinish = async () => {
+    const res = await axios.put(
+      "/api/updateUserState",
+      {},
+      { headers: { auth: localStorage.getItem("session") } }
+    );
+    if (res.data.success) {
+      getUserData(res.data.user);
+      history.push("/");
+    }
   };
 
   const handleSnackBarByComponent = (severity, message) => {
@@ -167,4 +177,7 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+const mapDispatchToProps = {
+  getUserData,
+};
+export default connect(null, mapDispatchToProps)(Settings);

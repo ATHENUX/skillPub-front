@@ -77,7 +77,7 @@ const SidebarMd = ({ user, userLoggedIn }) => {
         <CardContent>
           <div className={`${classes.contentMd}`}>
             <Avatar alt="avatar" className={`${classes.large}`} src={user?.avatar}>
-              {user?.firstName}
+              {user?.firstName.substring(0, 1)}
             </Avatar>
             {user?._id !== userLoggedIn?._id && (
               <Button

@@ -15,6 +15,7 @@ const initialState = {
   location: { latitude: 0, longitude: 0 },
   password: "",
   phone: "",
+  state: "",
   postsList: [],
   savedposts: [],
   sharedPosts: [],
