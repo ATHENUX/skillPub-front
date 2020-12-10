@@ -12,7 +12,7 @@ import SkeletonSidebar from "Components/profile/SkeletonSidebar";
 import SkeletonSidebarMd from "Components/profile/SkeletonSidebarMd";
 import AppBarProfile from "Components/profile/AppBarProfile";
 import AppBarProfileMd from "Components/profile/AppBarProfileMd";
-import Post from "Components/profile/Post";
+import Post from "Components/post/Post";
 import SnackBar from "Components/SnackBar";
 
 //i18n
@@ -100,6 +100,9 @@ const Profile = () => {
 
       <AppBarProfile isFixed={isFixed} user={user} />
       <AppBarProfileMd isFixed={isFixedMd} user={user} />
+      <Post />
+      <Post />
+      <Post />
       <Post />
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>

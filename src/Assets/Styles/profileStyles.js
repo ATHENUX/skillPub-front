@@ -106,26 +106,13 @@ export const useProfileStyles = makeStyles((theme) =>
     skill: {
       margin: ".2em",
     },
-    postContainer: {
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "wrap",
-      flexDirection: "column",
-      marginTop: theme.spacing(5),
-      "& p": {
-        width: "500px",
-        margin: "auto",
-      },
-      [theme.breakpoints.down("xs")]: {
-        marginTop: theme.spacing(16),
-      },
-    },
     appBarProfile: {
       position: "absolute",
       left: "300px",
       width: "calc(100% - 300px)",
       borderRadius: "0",
       display: "flex",
+      zIndex: "3",
       "& .MuiButtonBase-root": {
         borderRadius: "0!important",
       },

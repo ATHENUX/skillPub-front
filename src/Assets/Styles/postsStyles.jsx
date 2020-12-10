@@ -1,4 +1,5 @@
-import { makeStyles, fade } from "@material-ui/core";
+import { makeStyles, fade, Avatar } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 export const usePostStyles = makeStyles((theme) => ({
   paper: {
@@ -60,4 +61,63 @@ export const usePostStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
+  postContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    flexWrap: "wrap",
+    marginTop: theme.spacing(5),
+    [theme.breakpoints.down("xs")]: {
+      marginTop: theme.spacing(16),
+    },
+  },
+  post: {
+    width: "600px",
+  },
+  media: {
+    position: "relative",
+    "& .CarouselItem": {
+      height: "350px",
+      overflow: "hidden",
+      backgroundColor: "#000",
+    },
+    "& img": {
+      width: "100%",
+    },
+    "& .Carousel-indicators-71": {
+      position: "absolute",
+      top: "320px",
+    },
+  },
+  CardAction: {
+    justifyContent: "space-around",
+    "& .MuiIconButton-root:hover": {
+      backgroundColor: "rgba(255, 255, 255, -0.92)!important",
+    },
+  },
+  secondUser: {
+    position: "relative",
+  },
+  secondUserTitle: {
+    display: "flex",
+    alignItems: "center",
+    position: "absolute",
+    left: "5em",
+    top: "-2em",
+  },
+  smallText: {
+    fontSize: ".9em",
+    opacity: 0.5,
+  },
+  secondUserBody: {
+    margin: "0 4em 1em 4em",
+  },
 }));
+
+export const SmallAvatar = withStyles((theme) => ({
+  root: {
+    width: 22,
+    height: 22,
+    border: `2px solid ${theme.palette.background.paper}`,
+  },
+}))(Avatar);
