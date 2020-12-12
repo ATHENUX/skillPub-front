@@ -128,6 +128,18 @@ export const useProfileStyles = makeStyles((theme) =>
       position: "fixed",
       top: "4.5em",
     },
+    postContainer: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      flexWrap: "wrap",
+      marginTop: theme.spacing(5),
+      marginBottom: theme.spacing(5),
+      [theme.breakpoints.down("xs")]: {
+        marginTop: theme.spacing(16),
+        marginBottom: theme.spacing(10),
+      },
+    },
     "@keyframes firstAvatar": {
       "0%": {
         position: "absolute",

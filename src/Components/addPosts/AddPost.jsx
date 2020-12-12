@@ -84,12 +84,9 @@ const AddPost = ({ user }) => {
     try {
       setIsLoading(true);
       const res = await axios.post("/api/posts", formData, config);
-      let { success, message, post } = res.data;
+      let { success, message } = res.data;
       if (success) {
-        const secondRes = await axios.put("/api/updatePostList", { _id: post._id }, config);
-        success = secondRes.data.success;
-        message = secondRes.data.message;
-        if (message === "Pushed post list") {
+        if (message === "Post created") {
           initialSnackBarProps.message = t("post.created");
           initialSnackBarProps.severity = "success";
         } else {
@@ -135,11 +132,11 @@ const AddPost = ({ user }) => {
                   fullWidth
                   variant="outlined"
                   size="small"
-                  label="Add a post"
+                  label={t("post.add")}
                   name="bodyContent"
                   autoComplete="off"
                   inputRef={register({
-                    required: { value: true, message: "Post body is required" },
+                    required: { value: true, message: t("post.add.message") },
                   })}
                   error={Boolean(errors?.bodyContent)}
                 />

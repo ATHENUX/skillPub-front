@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { setPosts } from "Redux/Reducers/Posts";
+import { connect } from "react-redux";
 
 //material-UI
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -21,7 +23,7 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const Profile = () => {
+const Profile = ({ setPosts, posts }) => {
   const [snackBar, setSnackBar] = useState({
     show: false,
     message: "",
@@ -56,15 +58,21 @@ const Profile = () => {
           { id: userID },
           { headers: { auth: localStorage.getItem("session") } }
         );
-        if (res.data.success) {
+        const resPosts = await axios.post(
+          "/api/getPostsProfile",
+          { id: userID },
+          { headers: { auth: localStorage.getItem("session") } }
+        );
+        if (res.data.success && resPosts.data.success) {
           setUser(res.data.user);
+          setPosts(resPosts.data.posts);
           setloading(true);
         }
       } catch (error) {
         setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
       }
     })();
-  }, [userID, snackBar, t]);
+  }, [userID, snackBar, t, setPosts]);
 
   const handleScroll = () => {
     if (ref.current) {
@@ -100,13 +108,22 @@ const Profile = () => {
 
       <AppBarProfile isFixed={isFixed} user={user} />
       <AppBarProfileMd isFixed={isFixedMd} user={user} />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      <div className={classes.postContainer}>
+        {posts?.map((post, id) => (
+          <Post key={post._id} user={user} post={post} id={id} />
+        ))}
+      </div>
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  posts: state.Posts,
+});
+
+const mapDispatchToProps = {
+  setPosts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -6,26 +6,26 @@ import TextsmsOutlinedIcon from "@material-ui/icons/TextsmsOutlined";
 import OpenInNewRoundedIcon from "@material-ui/icons/OpenInNewRounded";
 import BookmarkBorderRoundedIcon from "@material-ui/icons/BookmarkBorderRounded";
 
-const Actions = () => {
+const Actions = ({ likes, comments, republishValue, favorites, handleRepublish }) => {
   const classes = usePostStyles();
 
   return (
     <CardActions className={classes.CardAction}>
-      <IconButton aria-label="favorite">
+      <IconButton aria-label="likes">
         <FavoriteBorderIcon />
-        <Typography>22k</Typography>
+        <Typography>{likes}</Typography>
       </IconButton>
-      <IconButton aria-label="favorite">
+      <IconButton aria-label="comments">
         <TextsmsOutlinedIcon />
-        <Typography>250</Typography>
+        <Typography>{comments}</Typography>
       </IconButton>
-      <IconButton aria-label="favorite">
+      <IconButton aria-label="share" onClick={handleRepublish}>
         <OpenInNewRoundedIcon />
-        <Typography>1200</Typography>
+        <Typography>{republishValue}</Typography>
       </IconButton>
       <IconButton aria-label="favorite">
         <BookmarkBorderRoundedIcon />
-        <Typography>5</Typography>
+        <Typography>{favorites}</Typography>
       </IconButton>
     </CardActions>
   );

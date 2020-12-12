@@ -61,32 +61,26 @@ export const usePostStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  postContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    flexWrap: "wrap",
-    marginTop: theme.spacing(5),
-    [theme.breakpoints.down("xs")]: {
-      marginTop: theme.spacing(16),
-    },
-  },
+
   post: {
     width: "600px",
+    marginTop: theme.spacing(1),
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
   },
   media: {
     position: "relative",
     "& .CarouselItem": {
       height: "350px",
       overflow: "hidden",
-      backgroundColor: "#000",
+      backgroundColor: theme?.palette?.type === "light" ? "#f1f1f1d7" : "#14141482",
+      [theme.breakpoints.down("xs")]: {
+        height: "164px",
+      },
     },
     "& img": {
       width: "100%",
-    },
-    "& .Carousel-indicators-71": {
-      position: "absolute",
-      top: "320px",
     },
   },
   CardAction: {
@@ -104,6 +98,9 @@ export const usePostStyles = makeStyles((theme) => ({
     position: "absolute",
     left: "5em",
     top: "-2em",
+    [theme.breakpoints.down(296)]: {
+      top: "-1.5em",
+    },
   },
   smallText: {
     fontSize: ".9em",
@@ -111,6 +108,17 @@ export const usePostStyles = makeStyles((theme) => ({
   },
   secondUserBody: {
     margin: "0 4em 1em 4em",
+  },
+  marginBottom: {
+    marginBottom: theme.spacing(2),
+  },
+  btnDefault: {
+    opacity: 0.5,
+  },
+  contentButton: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "flex-end",
   },
 }));
 
