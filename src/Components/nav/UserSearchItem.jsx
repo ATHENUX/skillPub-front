@@ -1,3 +1,4 @@
+//material-UI
 import {
   Divider,
   Avatar,
@@ -9,18 +10,15 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Close";
 
-const UserSearchItem = () => {
+const UserSearchItem = ({ user }) => {
   return (
     <>
       <ListItem button>
         <ListItemAvatar>
-          <Avatar
-            src="https://lh3.googleusercontent.com/a-/AOh14Gh8p8QUbCIL1ratTG5gv64oCmqwG5aATM5FJfS3Hw=s96-c"
-            alt="some"
-          />
+          <Avatar src={user?.avatar} alt={`${user.firstName} ${user.lastName}`} />
         </ListItemAvatar>
         <ListItemText
-          primary="textosuperlargoparaqueaparexzcanasas"
+          primary={`${user.firstName} ${user.lastName}`}
           primaryTypographyProps={{
             noWrap: true,
           }}

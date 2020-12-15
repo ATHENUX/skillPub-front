@@ -1,25 +1,40 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { setSearchedUsers } from "Redux/Reducers/SearchedUsers";
 
 //material-UI
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
 
+//components
 import PaperInputSearch from "./PaperInputSearch";
 
 //i18n
 import { useTranslation } from "react-i18next";
 
-const InputSearch = () => {
+//axios
+import axios from "axiosConfig";
+
+const InputSearch = ({ setSearchedUsers }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchText, setSearchText] = useState("");
   const classes = useNavbarStyles();
   const { t } = useTranslation();
 
-  const handleChange = (e) => {
-    setSearchText(e.target.value);
+  const handleChange = async (e) => {
     if (!anchorEl && e.target.value.trim() !== "") {
       setAnchorEl(e.currentTarget);
+      try {
+        const res = await axios.post(`/api/searchByUser`, {
+          name: e.target.value,
+        });
+        let { success, users } = res.data;
+        if (success) {
+          setSearchedUsers(users);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     } else if (e.target.value.trim() === "") {
       setAnchorEl(null);
     }
@@ -48,15 +63,18 @@ const InputSearch = () => {
             input: classes.inputInput,
           }}
           inputProps={{ "aria-label": "search" }}
-          value={searchText}
           onChange={handleChange}
           onFocus={handleClick}
           onBlur={handleClose}
         />
-        <PaperInputSearch anchorEl={anchorEl} />
+        {anchorEl && <PaperInputSearch anchorEl={anchorEl} />}
       </div>
     </>
   );
 };
 
-export default InputSearch;
+const mapDispatchToProps = {
+  setSearchedUsers,
+};
+
+export default connect(null, mapDispatchToProps)(InputSearch);

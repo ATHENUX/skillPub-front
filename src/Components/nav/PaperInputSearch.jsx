@@ -1,10 +1,13 @@
+import { connect } from "react-redux";
+
+//material-UI
 import { Popper, Paper, List } from "@material-ui/core";
-
-import UserSearchItem from "./UserSearchItem";
-
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
 
-const PaperInputSearch = ({ anchorEl }) => {
+//components
+import UserSearchItem from "./UserSearchItem";
+
+const PaperInputSearch = ({ anchorEl, searchedUsers }) => {
   const classes = useNavbarStyles();
   return (
     <Popper
@@ -16,11 +19,17 @@ const PaperInputSearch = ({ anchorEl }) => {
     >
       <Paper className={classes.paperInputSearch} variant="outlined">
         <List dense={true}>
-          <UserSearchItem />
+          {searchedUsers.length > 0
+            ? searchedUsers.map((user, index) => <UserSearchItem key={index} user={user} />)
+            : "No users"}
         </List>
       </Paper>
     </Popper>
   );
 };
 
-export default PaperInputSearch;
+const mapStateToProps = (state) => ({
+  searchedUsers: state.SearchedUsers,
+});
+
+export default connect(mapStateToProps)(PaperInputSearch);
