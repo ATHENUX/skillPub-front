@@ -1,5 +1,8 @@
 import { useRef, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { setPosts } from "Redux/Reducers/Posts";
+import { connect } from "react-redux";
+import { constants } from "constants/constants";
 
 //material-UI
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -12,7 +15,7 @@ import SkeletonSidebar from "Components/profile/SkeletonSidebar";
 import SkeletonSidebarMd from "Components/profile/SkeletonSidebarMd";
 import AppBarProfile from "Components/profile/AppBarProfile";
 import AppBarProfileMd from "Components/profile/AppBarProfileMd";
-import Post from "Components/profile/Post";
+import Post from "Components/post/Post";
 import SnackBar from "Components/SnackBar";
 
 //i18n
@@ -21,7 +24,7 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const Profile = () => {
+const Profile = ({ setPosts, posts }) => {
   const [snackBar, setSnackBar] = useState({
     show: false,
     message: "",
@@ -34,7 +37,10 @@ const Profile = () => {
   const [loading, setloading] = useState(false);
   const classes = useProfileStyles();
   const [user, setUser] = useState({});
+  const [limit, setLimit] = useState(constants.numberPosts);
+  const [postsCount, setPostsCount] = useState(0);
   const ref = useRef(null);
+  const visor = useRef(null);
   const { userID } = useParams();
   const { t } = useTranslation();
 
@@ -56,7 +62,14 @@ const Profile = () => {
           { id: userID },
           { headers: { auth: localStorage.getItem("session") } }
         );
-        if (res.data.success) {
+        const resCountPosts = await axios.post(
+          "/api/countPosts",
+          { id: userID },
+          { headers: { auth: localStorage.getItem("session") } }
+        );
+
+        if (res.data.success && resCountPosts.data.success) {
+          setPostsCount(resCountPosts.data.count + constants.numberPosts);
           setUser(res.data.user);
           setloading(true);
         }
@@ -64,7 +77,34 @@ const Profile = () => {
         setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
       }
     })();
-  }, [userID, snackBar, t]);
+  }, [userID, snackBar, t, setPosts]);
+
+  useEffect(() => {
+    const callback = async (entries, observer) => {
+      const el = entries[0];
+      if (limit <= postsCount) {
+        if (el.isIntersecting) {
+          const res = await axios.post(
+            "/api/getPostsProfile",
+            { id: userID, limit },
+            { headers: { auth: localStorage.getItem("session") } }
+          );
+
+          if (res.data.success) {
+            setLimit(limit + constants.numberPosts);
+            observer.disconnect();
+            setPosts(res.data.posts);
+          }
+        }
+      }
+    };
+    let observer = new IntersectionObserver(callback, {
+      rootMargin: "1000px",
+      threshold: 1.0,
+    });
+
+    observer.observe(visor.current);
+  }, [setPosts, userID, limit, postsCount]);
 
   const handleScroll = () => {
     if (ref.current) {
@@ -100,10 +140,23 @@ const Profile = () => {
 
       <AppBarProfile isFixed={isFixed} user={user} />
       <AppBarProfileMd isFixed={isFixedMd} user={user} />
-      <Post />
+      <div className={classes.postContainer}>
+        {posts?.map((post, id) => (
+          <Post key={post._id} user={user} post={post} id={id} />
+        ))}
+        <div id="visor" ref={visor}></div>
+      </div>
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  posts: state.Posts,
+});
+
+const mapDispatchToProps = {
+  setPosts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
