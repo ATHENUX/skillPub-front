@@ -68,7 +68,7 @@ const Profile = ({ setPosts, posts }) => {
           { headers: { auth: localStorage.getItem("session") } }
         );
 
-        if (res.data.success && resCountPosts.data.count) {
+        if (res.data.success && resCountPosts.data.success) {
           setPostsCount(resCountPosts.data.count + constants.numberPosts);
           setUser(res.data.user);
           setloading(true);
