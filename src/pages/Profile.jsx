@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { setPosts } from "Redux/Reducers/Posts";
 import { connect } from "react-redux";
+import { constants } from "constants/constants";
 
 //material-UI
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -36,7 +37,10 @@ const Profile = ({ setPosts, posts }) => {
   const [loading, setloading] = useState(false);
   const classes = useProfileStyles();
   const [user, setUser] = useState({});
+  const [limit, setLimit] = useState(constants.numberPosts);
+  const [postsCount, setPostsCount] = useState(0);
   const ref = useRef(null);
+  const visor = useRef(null);
   const { userID } = useParams();
   const { t } = useTranslation();
 
@@ -58,14 +62,15 @@ const Profile = ({ setPosts, posts }) => {
           { id: userID },
           { headers: { auth: localStorage.getItem("session") } }
         );
-        const resPosts = await axios.post(
-          "/api/getPostsProfile",
+        const resCountPosts = await axios.post(
+          "/api/countPosts",
           { id: userID },
           { headers: { auth: localStorage.getItem("session") } }
         );
-        if (res.data.success && resPosts.data.success) {
+
+        if (res.data.success && resCountPosts.data.count) {
+          setPostsCount(resCountPosts.data.count + constants.numberPosts);
           setUser(res.data.user);
-          setPosts(resPosts.data.posts);
           setloading(true);
         }
       } catch (error) {
@@ -73,6 +78,33 @@ const Profile = ({ setPosts, posts }) => {
       }
     })();
   }, [userID, snackBar, t, setPosts]);
+
+  useEffect(() => {
+    const callback = async (entries, observer) => {
+      const el = entries[0];
+      if (limit <= postsCount) {
+        if (el.isIntersecting) {
+          const res = await axios.post(
+            "/api/getPostsProfile",
+            { id: userID, limit },
+            { headers: { auth: localStorage.getItem("session") } }
+          );
+
+          if (res.data.success) {
+            setLimit(limit + constants.numberPosts);
+            observer.disconnect();
+            setPosts(res.data.posts);
+          }
+        }
+      }
+    };
+    let observer = new IntersectionObserver(callback, {
+      rootMargin: "1000px",
+      threshold: 1.0,
+    });
+
+    observer.observe(visor.current);
+  }, [setPosts, userID, limit, postsCount]);
 
   const handleScroll = () => {
     if (ref.current) {
@@ -112,6 +144,7 @@ const Profile = ({ setPosts, posts }) => {
         {posts?.map((post, id) => (
           <Post key={post._id} user={user} post={post} id={id} />
         ))}
+        <div id="visor" ref={visor}></div>
       </div>
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>

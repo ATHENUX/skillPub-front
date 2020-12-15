@@ -74,7 +74,7 @@ export const usePostStyles = makeStyles((theme) => ({
     "& .CarouselItem": {
       height: "350px",
       overflow: "hidden",
-      backgroundColor: theme?.palette?.type === "light" ? "#f1f1f1d7" : "#14141482",
+      backgroundColor: theme?.palette?.type === "light" ? "#f1f1f1d7" : "#1414142e",
       [theme.breakpoints.down("xs")]: {
         height: "164px",
       },
