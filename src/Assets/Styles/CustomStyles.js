@@ -5,7 +5,7 @@ export default makeStyles((theme) =>
     main: {
       display: "flex",
       justifyContent: "center",
-      width: "100vw",
+      width: "100%",
       marginTop: 20,
     },
     middle: {

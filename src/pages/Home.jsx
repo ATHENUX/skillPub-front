@@ -4,7 +4,8 @@ import { useMediaQuery } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 
 //components
-import AddPost from "Components/posts/AddPost";
+import AddPost from "Components/addPosts/AddPost";
+import Post from "Components/post/Post";
 
 //hooks
 import useSEO from "Hooks/useSEO";
@@ -23,6 +24,7 @@ const Home = () => {
     <div className={classes.main}>
       <div className={watch ? classes.middle : ""}>
         <AddPost />
+        <Post />
       </div>
     </div>
   );

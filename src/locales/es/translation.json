@@ -70,5 +70,11 @@
   "maximum.files.supported": "El maximo de archivos soportados es de 5",
   "files.supported": "Archivos soportados .jpg, .png, .jpeg, .gif",
   "post.created": "El post ha sido creado",
-  "file.too.large": "Hay una imagen que es muy pesada"
+  "file.too.large": "Hay una imagen que es muy pesada",
+  "post.add":"¿Que quieres contarnos?",
+  "post.add.message":"Se requiere el cuerpo del poste",
+  "post.republished.message.success":"Publicación compartida",
+  "post.republished.message.error":"Publicación ya compartida",
+  "cancel":"Cancelar",
+  "share":"Compartir"
 }

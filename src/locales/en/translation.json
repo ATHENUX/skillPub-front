@@ -70,5 +70,11 @@
   "maximum.files.supported": "Maximum files supported up to 5",
   "files.supported": "Files supported .jpg, .png, .jpeg, .gif",
   "post.created": "Post has been created",
-  "file.too.large": "There's a file that's too large"
+  "file.too.large": "There's a file that's too large",
+  "post.add":"What do you want to tell us?",
+  "post.add.message":"Post body is required",
+  "post.republished.message.success":"shared post",
+  "post.republished.message.error":"Post already shared",
+  "cancel":"Cancel",
+  "share":"Share"
 }
