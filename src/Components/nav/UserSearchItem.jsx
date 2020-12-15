@@ -1,19 +1,12 @@
+import { Link } from "react-router-dom";
+
 //material-UI
-import {
-  Divider,
-  Avatar,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  IconButton,
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Close";
+import { Divider, Avatar, ListItem, ListItemText, ListItemAvatar } from "@material-ui/core";
 
 const UserSearchItem = ({ user }) => {
   return (
     <>
-      <ListItem button>
+      <ListItem button component={Link} to={`/Profile/${user._id}`}>
         <ListItemAvatar>
           <Avatar src={user?.avatar} alt={`${user.firstName} ${user.lastName}`} />
         </ListItemAvatar>
@@ -23,11 +16,6 @@ const UserSearchItem = ({ user }) => {
             noWrap: true,
           }}
         />
-        <ListItemSecondaryAction>
-          <IconButton edge="end" size="small">
-            <DeleteIcon fontSize="inherit" />
-          </IconButton>
-        </ListItemSecondaryAction>
       </ListItem>
       <Divider />
     </>

@@ -119,7 +119,7 @@ const AddPost = ({ user }) => {
 
   return (
     <>
-      <Paper className={classes.paper} variant="outlined">
+      <Paper className={classes.paper}>
         <RegularSpinner isLoading={isLoading}>
           <form onSubmit={handleSubmit(handleAddPost)}>
             <Grid container>

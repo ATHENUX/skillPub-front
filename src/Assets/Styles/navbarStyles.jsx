@@ -72,6 +72,10 @@ export const useNavbarStyles = makeStyles((theme) =>
     simplePopper: {
       zIndex: 5000,
     },
+    noUsers: {
+      padding: theme.spacing(1),
+      textAlign: "center",
+    },
   })
 );
 

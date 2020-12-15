@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setSearchedUsers } from "Redux/Reducers/SearchedUsers";
 
 //material-UI
-import { InputBase } from "@material-ui/core";
+import { InputBase, ClickAwayListener } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useNavbarStyles } from "Assets/Styles/navbarStyles";
 
@@ -41,7 +41,7 @@ const InputSearch = ({ setSearchedUsers }) => {
   };
 
   const handleClick = (e) => {
-    if (!anchorEl && e.target.value.trim() !== "") {
+    if (e.target.value.trim() !== "") {
       setAnchorEl(e.currentTarget);
     }
   };
@@ -52,23 +52,24 @@ const InputSearch = ({ setSearchedUsers }) => {
 
   return (
     <>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
+      <ClickAwayListener onClickAway={handleClose}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder={t("search")}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+            onChange={handleChange}
+            onFocus={handleClick}
+          />
+          {anchorEl && <PaperInputSearch anchorEl={anchorEl} />}
         </div>
-        <InputBase
-          placeholder={t("search")}
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-          onChange={handleChange}
-          onFocus={handleClick}
-          onBlur={handleClose}
-        />
-        {anchorEl && <PaperInputSearch anchorEl={anchorEl} />}
-      </div>
+      </ClickAwayListener>
     </>
   );
 };
