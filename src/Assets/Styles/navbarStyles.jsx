@@ -23,12 +23,18 @@ export const useNavbarStyles = makeStyles((theme) =>
     search: {
       position: "relative",
       borderRadius: "30px",
-      backgroundColor: theme.palette.type === "light" ? fade(theme.palette.common.black, 0.1) : fade(theme.palette.common.white, 0.25),
+      backgroundColor:
+        theme.palette.type === "light"
+          ? fade(theme.palette.common.black, 0.1)
+          : fade(theme.palette.common.white, 0.25),
       width: "100%",
       marginRight: theme.spacing(2),
       marginLeft: theme.spacing(3),
       "&:hover": {
-        backgroundColor: theme.palette.type === "light" ? fade(theme.palette.common.black, 0.2) : fade(theme.palette.common.white, 0.25),
+        backgroundColor:
+          theme.palette.type === "light"
+            ? fade(theme.palette.common.black, 0.2)
+            : fade(theme.palette.common.white, 0.25),
       },
       [theme.breakpoints.up("sm")]: {
         width: "auto",
@@ -57,6 +63,19 @@ export const useNavbarStyles = makeStyles((theme) =>
       },
     },
     offset: theme.mixins.toolbar,
+    paperInputSearch: {
+      maxWidth: 320,
+      minWidth: 280,
+      maxHeight: 300,
+      overflowY: "hidden",
+    },
+    simplePopper: {
+      zIndex: 5000,
+    },
+    noUsers: {
+      padding: theme.spacing(1),
+      textAlign: "center",
+    },
   })
 );
 

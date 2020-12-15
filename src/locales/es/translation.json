@@ -76,5 +76,6 @@
   "post.republished.message.success":"Publicación compartida",
   "post.republished.message.error":"Publicación ya compartida",
   "cancel":"Cancelar",
-  "share":"Compartir"
+  "share":"Compartir",
+  "no.users": "No se encontraron usuarios"
 }

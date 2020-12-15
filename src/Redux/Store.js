@@ -4,11 +4,13 @@ import { createStore, combineReducers } from "redux";
 import User from "./Reducers/User";
 import Posts from "./Reducers/Posts";
 import ThemeMode from "./Reducers/ThemeMode";
+import SearchedUsers from "./Reducers/SearchedUsers";
 
 const reducer = combineReducers({
   User,
   ThemeMode,
   Posts,
+  SearchedUsers,
 });
 
 const composeEnhancers =

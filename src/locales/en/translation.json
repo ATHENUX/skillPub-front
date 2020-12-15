@@ -76,5 +76,6 @@
   "post.republished.message.success":"shared post",
   "post.republished.message.error":"Post already shared",
   "cancel":"Cancel",
-  "share":"Share"
+  "share":"Share",
+  "no.users": "No users found"
 }
