@@ -2,15 +2,15 @@ import { Link as RouterLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 //material-UI
-import { IconButton, Badge } from "@material-ui/core";
+import { IconButton /*Badge*/ } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+// import MenuBookIcon from "@material-ui/icons/MenuBook";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
 
 const IconsNanbar = ({ user }) => {
   return (
     <>
-      <IconButton aria-label="show 4 new mails" color="inherit">
+      {/* <IconButton aria-label="show 4 new mails" color="inherit">
         <MenuBookIcon />
       </IconButton>
 
@@ -18,7 +18,7 @@ const IconsNanbar = ({ user }) => {
         <Badge badgeContent={4} color="primary">
           <NotificationsIcon />
         </Badge>
-      </IconButton>
+      </IconButton> */}
 
       <IconButton
         aria-label="show 4 new mails"

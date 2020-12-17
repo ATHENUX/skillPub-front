@@ -1,5 +1,6 @@
 import { createStyles, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import { withStyles, fade } from "@material-ui/core/styles";
+const drawerWidth = 240;
 
 export const useNavbarStyles = makeStyles((theme) =>
   createStyles({
@@ -132,3 +133,46 @@ export const StyledMenuItem = withStyles((theme) => ({
     },
   },
 }))(MenuItem);
+
+export const useNavbarSetting = makeStyles((theme) => ({
+  appBar: {
+    position: "relative",
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+  },
+  main: {
+    width: "100%",
+  },
+  container: {
+    width: "50%",
+    margin: "0 auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      margin: "0",
+    },
+  },
+  AccountForm: {
+    display: "flex",
+    flexDirection: "column",
+    "& .MuiTextField-root": {
+      marginBottom: theme.spacing(1),
+    },
+  },
+}));

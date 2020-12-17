@@ -22,13 +22,21 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { StyledMenuItem, StyledMenu } from "Assets/Styles/navbarStyles";
 
+//components
+import Settings from "./Settings";
+
 //i18n
 import { useTranslation } from "react-i18next";
 
 const CustomizedMenus = ({ changeThemeMode, mode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
   const history = useHistory();
   const { t } = useTranslation();
+
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -74,7 +82,7 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
 
         <Divider component="li" />
 
-        <StyledMenuItem>
+        <StyledMenuItem onClick={() => setOpen(true)}>
           <ListItem component="div">
             <ListItemAvatar>
               <Avatar>
@@ -109,6 +117,7 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
           </ListItem>
         </StyledMenuItem>
       </StyledMenu>
+      <Settings open={open} handleClose={handleCloseDialog} />
     </>
   );
 };
