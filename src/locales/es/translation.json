@@ -77,5 +77,13 @@
   "post.republished.message.error":"Publicación ya compartida",
   "cancel":"Cancelar",
   "share":"Compartir",
-  "no.users": "No se encontraron usuarios"
+  "no.users": "No se encontraron usuarios",
+  "successful.update":"Actualización exitosa",
+  "account.settings":"Configuraciones de la cuenta",
+  "account":"Cuenta",
+  "language":"Lenguaje",
+  "choose.language":"Elige tu idioma",
+  "spanish":"Español",
+  "english":"Ingles",
+  "post":"Enviar"
 }

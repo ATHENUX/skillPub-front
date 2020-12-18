@@ -18,16 +18,36 @@ import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
 import Account from "./Account";
 import Language from "./Language";
 import DrawerComponent from "./DrawerComponent";
+import SnackBar from "Components/SnackBar";
+
+//i18n
+import { useTranslation } from "react-i18next";
 
 const Sidebar = ({ handleClose }) => {
   const theme = useTheme();
   const orientation = useMediaQuery(theme.breakpoints.down("sm"));
+  const { t } = useTranslation();
   const [select, setSelect] = useState(0);
   const [open, setOpen] = useState(false);
+  const [snackBar, setSnackBar] = useState({
+    show: false,
+    message: "",
+    vertical: "top",
+    horizontal: "left",
+    severity: "error",
+  });
   const classes = useNavbarSetting();
 
   const handleSelect = (id) => {
     setSelect(id);
+  };
+
+  const handleCloseSnackBar = () => {
+    setSnackBar({ ...snackBar, show: false });
+  };
+
+  const handleOpenSnackBar = (data) => {
+    setSnackBar({ ...snackBar, ...data });
   };
 
   return (
@@ -46,7 +66,7 @@ const Sidebar = ({ handleClose }) => {
             </IconButton>
           )}
           <Typography variant="h6" className={classes.title}>
-            Settings
+            {t("settings")}
           </Typography>
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CloseIcon />
@@ -62,9 +82,12 @@ const Sidebar = ({ handleClose }) => {
       />
 
       <main className={classes.main}>
-        {select === 0 && <Account orientation={orientation} />}
+        {select === 0 && (
+          <Account orientation={orientation} handleOpenSnackBar={handleOpenSnackBar} />
+        )}
         {select === 1 && <Language orientation={orientation} />}
       </main>
+      <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>
   );
 };

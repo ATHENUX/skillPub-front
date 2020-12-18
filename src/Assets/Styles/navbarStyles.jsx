@@ -169,6 +169,7 @@ export const useNavbarSetting = makeStyles((theme) => ({
     },
   },
   AccountForm: {
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     "& .MuiTextField-root": {

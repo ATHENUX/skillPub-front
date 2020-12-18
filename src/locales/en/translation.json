@@ -77,5 +77,13 @@
   "post.republished.message.error":"Post already shared",
   "cancel":"Cancel",
   "share":"Share",
-  "no.users": "No users found"
+  "no.users": "No users found",
+  "successful.update":"Successful update",
+  "account.settings":"Account settings",
+  "account":"Account",
+  "language":"Language",
+  "choose.language":"Choose your language",
+  "spanish":"Spanish",
+  "english":"English",
+  "post":"Post"
 }

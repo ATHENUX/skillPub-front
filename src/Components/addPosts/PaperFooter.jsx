@@ -5,7 +5,11 @@ import { Button, Divider, IconButton } from "@material-ui/core";
 import { usePostStyles } from "Assets/Styles/postsStyles";
 import ImageIcon from "@material-ui/icons/Image";
 
+//i18n
+import { useTranslation } from "react-i18next";
+
 const PaperFooter = ({ handleFileChange, register }) => {
+  const { t } = useTranslation();
   const classes = usePostStyles();
   return (
     <div>
@@ -30,7 +34,7 @@ const PaperFooter = ({ handleFileChange, register }) => {
         </div>
         <div>
           <Button variant="contained" color="primary" type="submit">
-            post
+            {t("post")}
           </Button>
         </div>
       </div>

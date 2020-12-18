@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { userSettings } from "Redux/Reducers/User";
 
 //material-UI
 import {
@@ -19,10 +20,13 @@ import DateFnsUtils from "@date-io/moment";
 //i18n
 import { useTranslation } from "react-i18next";
 
+//axios
+import axios from "axiosConfig";
+
 //moment
 import moment from "moment";
 
-const Account = ({ User, orientation }) => {
+const Account = ({ User, orientation, handleOpenSnackBar, userSettings }) => {
   const [user, setUser] = useState({
     email: User.email,
     gender: User.gender,
@@ -31,16 +35,57 @@ const Account = ({ User, orientation }) => {
   const classes = useNavbarSetting();
   const { t } = useTranslation();
 
-  const saveUser = (e) => {
+  const saveUser = async (e) => {
     e.preventDefault();
-    const dateOfBirth = moment(selectedDate).format("l");
-    console.log(user);
-    console.log(dateOfBirth);
+    try {
+      const dateOfBirth = moment(selectedDate).format("l");
+
+      if (user.email !== "") {
+        const res = await axios.post(
+          "/api/accountSettings",
+          { ...user, dateOfBirth },
+          { headers: { auth: localStorage.getItem("session") } }
+        );
+        const { success, message } = res.data;
+        if (success) {
+          handleOpenSnackBar({
+            show: true,
+            message: t("successful.update"),
+            severity: "success",
+          });
+          userSettings({
+            email: user.email,
+            gender: user.gender,
+            dateOfBirth,
+          });
+        } else {
+          if (message === "Email is required") {
+            handleOpenSnackBar({
+              show: true,
+              message: t("email.message.error.input.required"),
+              severity: "error",
+            });
+          }
+        }
+      } else {
+        handleOpenSnackBar({
+          show: true,
+          message: t("email.message.error.input.required"),
+          severity: "error",
+        });
+      }
+    } catch (error) {
+      handleOpenSnackBar({
+        show: true,
+        message: t("email.message.error.input.required"),
+        severity: "error",
+      });
+    }
   };
 
   return (
     <Container className={classes.container}>
-      <Typography variant={orientation ? "h6" : "h3"}>Account settings</Typography>
+      <Typography variant={orientation ? "h6" : "h3"}>{t("account.settings")}</Typography>
       <form onSubmit={saveUser} className={classes.AccountForm}>
         <TextField
           type="email"
@@ -89,4 +134,8 @@ const mapStateToProps = (state) => ({
   User: state.User,
 });
 
-export default connect(mapStateToProps)(Account);
+const mapDispatchToProps = {
+  userSettings,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);
