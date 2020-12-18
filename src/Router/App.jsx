@@ -20,14 +20,20 @@ import Profile from "pages/Profile";
 //components
 import Navbar from "Components/nav/Navbar";
 
+//i18n
+import { useTranslation } from "react-i18next";
+
 //hooks
 import getUser from "helpers/getUser";
 
 const App = ({ changeThemeMode, mode, getUserData }) => {
+  const { i18n } = useTranslation();
+
   useEffect(() => {
     getUser(getUserData);
     changeThemeMode(localStorage.getItem("theme"));
-  }, [getUserData, changeThemeMode]);
+    i18n.changeLanguage(localStorage.getItem("language"));
+  }, [getUserData, changeThemeMode, i18n]);
 
   return (
     <Router>
