@@ -34,7 +34,6 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_USER_DATA:
       return payload;
     case USER_SETTINGS:
-      console.log(payload);
       return { ...state, ...payload };
     default:
       return state;
