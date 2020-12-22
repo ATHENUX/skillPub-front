@@ -176,4 +176,11 @@ export const useNavbarSetting = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
     },
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  newPassword: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
 }));

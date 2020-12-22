@@ -31,6 +31,10 @@ const DrawerComponent = ({ select, handleSelect, open, orientation }) => {
           <ListItemText primary={t("language")} />
           <ArrowForwardIosIcon />
         </ListItem>
+        <ListItem button selected={select === 2} onClick={() => handleSelect(2)}>
+          <ListItemText primary={t("change.password")} />
+          <ArrowForwardIosIcon />
+        </ListItem>
       </List>
       <Divider />
     </Drawer>
