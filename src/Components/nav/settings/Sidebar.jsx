@@ -17,6 +17,7 @@ import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
 //components
 import Account from "./Account";
 import Language from "./Language";
+import Password from "./Password";
 import DrawerComponent from "./DrawerComponent";
 import SnackBar from "Components/SnackBar";
 
@@ -86,6 +87,9 @@ const Sidebar = ({ handleClose }) => {
           <Account orientation={orientation} handleOpenSnackBar={handleOpenSnackBar} />
         )}
         {select === 1 && <Language orientation={orientation} />}
+        {select === 2 && (
+          <Password orientation={orientation} handleOpenSnackBar={handleOpenSnackBar} />
+        )}
       </main>
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>

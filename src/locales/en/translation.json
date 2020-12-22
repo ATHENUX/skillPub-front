@@ -85,5 +85,13 @@
   "choose.language":"Choose your language",
   "spanish":"Spanish",
   "english":"English",
-  "post":"Post"
+  "post":"Post",
+  "change.password":"Change password",
+  "current.password":"Current password",
+  "new.password":"New password",
+  "repeat.new.password":"Repeat the password",
+  "repeat.password.message":"The passwords are not the same",
+  "newPassword.invalid":"The new password is invalid",
+  "current.password.message":"The current password is incorrect"
+
 }
