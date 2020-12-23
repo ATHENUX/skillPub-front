@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { updateByField } from "Redux/Reducers/User";
 
 //material-UI
 import { IconButton, Typography, Button } from "@material-ui/core";
@@ -19,7 +20,7 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const EditBannerPhoto = ({ user }) => {
+const EditBannerPhoto = ({ user, updateByField }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
@@ -31,7 +32,6 @@ const EditBannerPhoto = ({ user }) => {
   const [bannerPhoto, setBannerPhoto] = useState("");
   const [photo, setPhoto] = useState(user.banner);
   const [cropper, setCropper] = useState(null);
-  const [croppedData, setCroppedData] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [snackBar, setSnackBar] = useState(initialSnackBarProps);
@@ -92,6 +92,9 @@ const EditBannerPhoto = ({ user }) => {
           });
           setLoading(false);
           setPhoto(userUpdated.banner);
+          updateByField({
+            banner: userUpdated.banner,
+          });
         } catch (error) {
           setLoading(false);
           console.log(error);
@@ -179,4 +182,8 @@ const mapStateToProps = (state) => ({
   user: state.User,
 });
 
-export default connect(mapStateToProps)(EditBannerPhoto);
+const mapDispatchToProps = {
+  updateByField,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditBannerPhoto);

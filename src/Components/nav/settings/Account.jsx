@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { userSettings } from "Redux/Reducers/User";
+import { updateByField } from "Redux/Reducers/User";
 
 //material-UI
 import {
@@ -26,7 +26,7 @@ import axios from "axiosConfig";
 //moment
 import moment from "moment";
 
-const Account = ({ User, orientation, handleOpenSnackBar, userSettings }) => {
+const Account = ({ User, orientation, handleOpenSnackBar, updateByField }) => {
   const [user, setUser] = useState({
     email: User.email,
     gender: User.gender,
@@ -53,7 +53,7 @@ const Account = ({ User, orientation, handleOpenSnackBar, userSettings }) => {
             message: t("successful.update"),
             severity: "success",
           });
-          userSettings({
+          updateByField({
             email: user.email,
             gender: user.gender,
             dateOfBirth,
@@ -135,7 +135,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  userSettings,
+  updateByField,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);
