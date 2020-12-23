@@ -55,6 +55,7 @@
   "gender.other":"Other",
   "location":"Location",
   "save":"Save",
+  "saving": "Saving",
   "skills":"Skills",
   "added.skills":"Added skills",
   "posts":"Posts",
@@ -77,5 +78,9 @@
   "post.republished.message.error":"Post already shared",
   "cancel":"Cancel",
   "share":"Share",
-  "no.users": "No users found"
+  "no.users": "No users found",
+  "description.max.length": "Maximum characters 60",
+  "successfully.added.banner": "Banner added",
+  "successfully.updated.banner": "Banner updated",
+  "image.upload.failed": "Error while uploading image, try again"
 }
