@@ -92,6 +92,7 @@
   "repeat.new.password":"Repeat the password",
   "repeat.password.message":"The passwords are not the same",
   "newPassword.invalid":"The new password is invalid",
-  "current.password.message":"The current password is incorrect"
-
+  "current.password.message":"The current password is incorrect",
+  "check.email":"Great! check email",
+  "go.login":"Go login"
 }

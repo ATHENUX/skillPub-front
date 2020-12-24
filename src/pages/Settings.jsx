@@ -20,10 +20,13 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
+//hooks
+import useSEO from "Hooks/useSEO";
+
 //moment
 import moment from "moment";
 
-const Settings = ({ getUserData, user }) => {
+const Settings = ({ getUserData }) => {
   const theme = useTheme();
   const orientation = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useSettingsStyles();
@@ -42,6 +45,8 @@ const Settings = ({ getUserData, user }) => {
   });
   const history = useHistory();
   const { t } = useTranslation();
+
+  useSEO({ title: `settings ${getUserData.firstName}`, description: "account settings" });
 
   const steps = [t("profile.setting"), t("select.skills"), t("successful")];
 

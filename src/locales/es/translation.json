@@ -92,6 +92,8 @@
   "repeat.new.password":"Repite la contraseña",
   "repeat.password.message":"Las contraseñas no son iguales",
   "newPassword.invalid":"La nueva contraseña no es valida",
-  "current.password.message":"La contraseña actual es incorrecta"
+  "current.password.message":"La contraseña actual es incorrecta",
+  "check.email":"¡Estupendo! Revisa el correo electrónico",
+  "go.login":"Ir a inicio de sesión"
 
 }
