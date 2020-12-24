@@ -24,6 +24,9 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
+//hooks
+import useSEO from "Hooks/useSEO";
+
 const Profile = ({ setPosts, posts }) => {
   const [snackBar, setSnackBar] = useState({
     show: false,
@@ -43,6 +46,8 @@ const Profile = ({ setPosts, posts }) => {
   const visor = useRef(null);
   const { userID } = useParams();
   const { t } = useTranslation();
+
+  useSEO({ title: "profile", description: "User profile" });
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

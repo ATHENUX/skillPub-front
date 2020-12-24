@@ -56,6 +56,7 @@ export const useAccessStyle = makeStyles((theme) =>
       width: "100%",
       display: "flex",
       justifyContent: "center",
+      flexDirection: "column",
     },
     overlayContainer: {
       position: "absolute",

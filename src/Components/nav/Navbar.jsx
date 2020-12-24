@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useRouteMatch } from "react-router-dom";
 
 //material-UI
 import { Hidden } from "@material-ui/core";
@@ -13,11 +13,16 @@ const Navbar = (props) => {
   const classes = useNavbarStyles();
 
   let location = useLocation();
+  let math = useRouteMatch("/recoverpassword/:userID");
+
+  if (math === null) math = "";
+
   if (
     location.pathname === "/access" ||
     location.pathname === "/404" ||
     location.pathname === "/500" ||
-    location.pathname === "/settings"
+    location.pathname === "/settings" ||
+    location.pathname === math.url
   ) {
     return null;
   }
