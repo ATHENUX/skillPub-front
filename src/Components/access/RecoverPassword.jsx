@@ -5,7 +5,6 @@ import {
   Button,
   Dialog,
   Link,
-  DialogContent,
   Slide,
   TextField,
   IconButton,
@@ -17,9 +16,13 @@ import LockIcon from "@material-ui/icons/Lock";
 import CloseIcon from "@material-ui/icons/Close";
 import { useAccessStyle } from "Assets/Styles/accessStyles";
 import { useTheme } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
 
 //i18n
 import { useTranslation } from "react-i18next";
+
+//axios
+import axios from "axiosConfig";
 
 const newTransition = (props, ref) => {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -28,7 +31,14 @@ const newTransition = (props, ref) => {
 const Transition = forwardRef(newTransition);
 
 const AlertDialogSlide = () => {
+  const [alert, setAlert] = useState({
+    show: false,
+    message: "",
+    severity: "error",
+  });
+
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
   const { t } = useTranslation();
   const classes = useAccessStyle();
   const theme = useTheme();
@@ -40,6 +50,36 @@ const AlertDialogSlide = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const sendEmail = async () => {
+    if (email !== "") {
+      const res = await axios.post("/api/sendEmail", { email });
+
+      const { success, message } = res.data;
+
+      if (success) {
+        setAlert({
+          message: t("check.email"),
+          show: true,
+          severity: "success",
+        });
+      } else {
+        if (message === "Email not found") {
+          setAlert({
+            message: t("email.message.error"),
+            show: true,
+            severity: "error",
+          });
+        }
+      }
+    } else {
+      setAlert({
+        message: t("email.message.error.input.required"),
+        show: true,
+        severity: "error",
+      });
+    }
   };
 
   return (
@@ -75,19 +115,22 @@ const AlertDialogSlide = () => {
           <form className={classes.formStyleRecoverPassword}>
             <TextField
               type="email"
+              name="email"
               label={t("modal.text")}
               autoFocus
               margin="dense"
               variant="outlined"
               size="small"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </form>
-          <DialogContent>
-            <Button variant="contained" color="primary">
+
+            <Button onClick={sendEmail} variant="contained" color="primary">
               {t("send.email")}
             </Button>
-          </DialogContent>
+          </form>
         </div>
+        {alert.show && <Alert severity={alert.severity}>{alert.message}</Alert>}
       </Dialog>
     </>
   );

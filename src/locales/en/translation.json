@@ -94,6 +94,8 @@
   "repeat.password.message":"The passwords are not the same",
   "newPassword.invalid":"The new password is invalid",
   "current.password.message":"The current password is incorrect",
+  "check.email":"Great! check email",
+  "go.login":"Go login",
   "description.max.length": "Maximum characters 60",
   "successfully.added.banner": "Banner added",
   "successfully.updated.banner": "Banner updated",

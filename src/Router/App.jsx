@@ -16,6 +16,7 @@ import Access from "pages/Access";
 import NotFound from "pages/NotFound";
 import Settings from "pages/Settings";
 import Profile from "pages/Profile";
+import RecoverPassword from "pages/RecoverPassword";
 
 //components
 import Navbar from "Components/nav/Navbar";
@@ -45,6 +46,7 @@ const App = ({ changeThemeMode, mode, getUserData }) => {
           <PrivateRoute exact path="/Profile/:userID" component={Profile} />
           <ProtectedRoute exact path="/settings" component={Settings} />
           <Route exact path="/access" component={Access} />
+          <Route exact path="/recoverpassword/:userID" component={RecoverPassword} />
           <Route exact path="/404" component={NotFound} />
           <Route exact path="*">
             <Redirect to="/404" />
