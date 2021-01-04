@@ -80,7 +80,7 @@ const EditBannerPhoto = ({ user, updateByField }) => {
           } else {
             if (message === "Error while uploading image to cloudinary") {
               initialSnackBarProps.message = t("image.upload.failed");
-            } else if (message === "image too large") {
+            } else if (message === "File too large") {
               initialSnackBarProps.message = t("file.too.large");
             } else {
               initialSnackBarProps.message = t("internal.server.error.title");
@@ -112,7 +112,7 @@ const EditBannerPhoto = ({ user, updateByField }) => {
       <div className={classes.photosContainer}>
         <div className={classes.positioningContainer}>
           <Typography variant="h6" align="center" gutterBottom>
-            Cover photo
+            {t("banner.photo")}
           </Typography>
           <form onSubmit={handleSave}>
             {photo ? (

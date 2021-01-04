@@ -97,5 +97,12 @@
   "description.max.length": "Caracteres maximos 60",
   "successfully.added.banner": "Banner añadido",
   "successfully.updated.banner": "Banner modificado",
-  "image.upload.failed": "Error al montar la imagen, intentar de nuevo"
+  "image.upload.failed": "Error al montar la imagen, intentar de nuevo",
+  "successfully.added.profilePhoto": "Foto de perfil añadida",
+  "successfully.updated.profilePhoto": "Foto de perfil editada",
+  "profilePhoto.google.facebook": "Foto de perfil tomada de Google ó Facebook",
+  "invalid.extension": "Extension invalida",
+  "main.info.updated": "Información principal editada",
+  "banner.photo": "Pancarta",
+  "profile.photo": "Foto de perfil"
 }
