@@ -74,7 +74,6 @@ export const useProfileStyles = makeStyles((theme) =>
       overflow: "hidden",
       "& img": {
         width: "100%",
-        position: "relative",
         height: "auto",
       },
     },
