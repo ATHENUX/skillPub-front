@@ -90,14 +90,14 @@ const AddPost = ({ user }) => {
           initialSnackBarProps.message = t("post.created");
           initialSnackBarProps.severity = "success";
         } else {
-          initialSnackBarProps.message = t("password.message.error");
+          initialSnackBarProps.message = t("internal.server.error.title");
         }
       } else if (message === "There's a file which extension is not valid") {
         initialSnackBarProps.message = t("files.supported");
       } else if (message === "File too large") {
         initialSnackBarProps.message = t("file.too.large");
       } else {
-        initialSnackBarProps.message = t("password.message.error");
+        initialSnackBarProps.message = t("internal.server.error.title");
       }
       setIsLoading(false);
       setPreviewImages([]);

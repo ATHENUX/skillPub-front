@@ -55,6 +55,7 @@
   "gender.other":"Otro",
   "location":"Ubicación",
   "save":"Guardar",
+  "saving": "Guardando",
   "skills":"Habilidades",
   "added.skills":"Habilidades añadidas",
   "posts":"Publicaciones",
@@ -94,6 +95,16 @@
   "newPassword.invalid":"La nueva contraseña no es valida",
   "current.password.message":"La contraseña actual es incorrecta",
   "check.email":"¡Estupendo! Revisa el correo electrónico",
-  "go.login":"Ir a inicio de sesión"
-
+  "go.login":"Ir a inicio de sesión",
+  "description.max.length": "Caracteres maximos 60",
+  "successfully.added.banner": "Banner añadido",
+  "successfully.updated.banner": "Banner modificado",
+  "image.upload.failed": "Error al montar la imagen, intentar de nuevo",
+  "successfully.added.profilePhoto": "Foto de perfil añadida",
+  "successfully.updated.profilePhoto": "Foto de perfil editada",
+  "profilePhoto.google.facebook": "Foto de perfil tomada de Google ó Facebook",
+  "invalid.extension": "Extension invalida",
+  "main.info.updated": "Información principal editada",
+  "banner.photo": "Pancarta",
+  "profile.photo": "Foto de perfil"
 }

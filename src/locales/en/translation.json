@@ -55,6 +55,7 @@
   "gender.other":"Other",
   "location":"Location",
   "save":"Save",
+  "saving": "Saving",
   "skills":"Skills",
   "added.skills":"Added skills",
   "posts":"Posts",
@@ -94,5 +95,16 @@
   "newPassword.invalid":"The new password is invalid",
   "current.password.message":"The current password is incorrect",
   "check.email":"Great! check email",
-  "go.login":"Go login"
+  "go.login":"Go login",
+  "description.max.length": "Maximum characters 60",
+  "successfully.added.banner": "Banner added",
+  "successfully.updated.banner": "Banner updated",
+  "image.upload.failed": "Error while uploading image, try again",
+  "successfully.added.profilePhoto": "Profile photo added",
+  "successfully.updated.profilePhoto": "Profile photo updated",
+  "profilePhoto.google.facebook": "Profile picture taken either from Google or Facebook",
+  "invalid.extension": "Invalid extension", 
+  "main.info.updated": "Main information updated",
+  "banner.photo": "Banner Photo",
+  "profile.photo": "Profile Photo"
 }

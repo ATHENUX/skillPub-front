@@ -74,7 +74,6 @@ export const useProfileStyles = makeStyles((theme) =>
       overflow: "hidden",
       "& img": {
         width: "100%",
-        position: "relative",
         height: "auto",
       },
     },
@@ -166,6 +165,46 @@ export const useProfileStyles = makeStyles((theme) =>
         opacity: 1,
         zIndex: "4",
       },
+    },
+    photosContainer: {
+      display: "flex",
+      justifyContent: "center",
+    },
+    bannerPhoto: {
+      borderRadius: 15,
+      maxWidth: "100%",
+      maxHeight: 200,
+    },
+    positioningContainer: {
+      position: "relative",
+    },
+    editPhotosButton: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+    },
+    editProfileButton: {
+      position: "absolute",
+      top: "45%",
+      left: "38%",
+      transform: "translate(-50%)",
+    },
+    fakeBannerSkeleton: {
+      borderRadius: 15,
+      height: 200,
+      width: 500,
+    },
+    closeButton: {
+      position: "absolute",
+      right: theme.spacing(1),
+      top: theme.spacing(1),
+      color: theme.palette.grey[500],
+    },
+    saveButtons: {
+      margin: theme.spacing(2),
+      display: "flex",
+      justifyContent: "flex-end",
     },
   })
 );

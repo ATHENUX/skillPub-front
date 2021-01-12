@@ -17,6 +17,7 @@ import AppBarProfile from "Components/profile/AppBarProfile";
 import AppBarProfileMd from "Components/profile/AppBarProfileMd";
 import Post from "Components/post/Post";
 import SnackBar from "Components/SnackBar";
+import { Image } from "cloudinary-react";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -27,7 +28,7 @@ import axios from "axiosConfig";
 //hooks
 import useSEO from "Hooks/useSEO";
 
-const Profile = ({ setPosts, posts }) => {
+const Profile = ({ setPosts, posts, userState }) => {
   const [snackBar, setSnackBar] = useState({
     show: false,
     message: "",
@@ -131,11 +132,17 @@ const Profile = ({ setPosts, posts }) => {
     <div>
       <div className={classes.bannerContent}>
         {loading ? (
-          <img
-            src="https://cdn.shortpixel.ai/client/q_glossy,ret_img/https://imkova.cl/wp-content/uploads/2020/07/banner-editable-Fortnite-1.jpg"
-            alt="banner"
-            ref={ref}
-          />
+          <>
+            {userState.banner ? (
+              <Image publicId={userState.banner} cloudName={process.env.REACT_APP_CLOUD_NAME} />
+            ) : (
+              <img
+                src="https://cdn.shortpixel.ai/client/q_glossy,ret_img/https://imkova.cl/wp-content/uploads/2020/07/banner-editable-Fortnite-1.jpg"
+                alt="banner"
+                ref={ref}
+              />
+            )}
+          </>
         ) : (
           <Skeleton variant="rect" height={300} ref={ref} />
         )}
@@ -158,6 +165,7 @@ const Profile = ({ setPosts, posts }) => {
 
 const mapStateToProps = (state) => ({
   posts: state.Posts,
+  userState: state.User,
 });
 
 const mapDispatchToProps = {

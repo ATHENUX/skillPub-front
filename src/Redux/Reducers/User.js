@@ -26,14 +26,14 @@ const initialState = {
 
 //management of the type of actions
 const GET_USER_DATA = "getUserData";
-const USER_SETTINGS = "userSettings";
+const UPDATE_BY_FIELD = "updateByField";
 
 //reducer
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_USER_DATA:
       return payload;
-    case USER_SETTINGS:
+    case UPDATE_BY_FIELD:
       return { ...state, ...payload };
     default:
       return state;
@@ -48,9 +48,9 @@ export const getUserData = (response) => {
   };
 };
 
-export const userSettings = (response) => {
+export const updateByField = (response) => {
   return {
-    type: USER_SETTINGS,
+    type: UPDATE_BY_FIELD,
     payload: response,
   };
 };

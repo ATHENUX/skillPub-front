@@ -117,15 +117,6 @@ const SidebarMd = ({ user, userLoggedIn }) => {
                 </Typography>
               </Typography>
             )}
-
-            {user?.adress && (
-              <Typography className={classes.text}>
-                {t("address")}:
-                <Typography component="strong" color="primary" className={classes.text}>
-                  {user?.adress}
-                </Typography>
-              </Typography>
-            )}
           </div>
           <Divider />
           <div>

@@ -21,6 +21,7 @@ import SimpleHeader from "./SimpleHeader";
 import HardHeader from "./HardHeader";
 import Actions from "./Actions";
 import SnackBar from "Components/SnackBar";
+import { Image } from "cloudinary-react";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -129,9 +130,14 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
         {post?.thumbnailsList.length !== 0 && (
           <Carousel className={classes.media} fullHeightHover autoPlay={false}>
             {post?.thumbnailsList.length === 1 ? (
-              <img src={post?.thumbnailsList[0]} alt="" />
+              <Image
+                publicId={post?.thumbnailsList[0]}
+                cloudName={process.env.REACT_APP_CLOUD_NAME}
+              />
             ) : (
-              post?.thumbnailsList.map((img, id) => <img key={id} src={img} alt="post" />)
+              post?.thumbnailsList.map((img, id) => (
+                <Image key={id} publicId={img} cloudName={process.env.REACT_APP_CLOUD_NAME} />
+              ))
             )}
           </Carousel>
         )}
