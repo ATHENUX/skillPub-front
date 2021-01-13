@@ -106,5 +106,8 @@
   "invalid.extension": "Invalid extension", 
   "main.info.updated": "Main information updated",
   "banner.photo": "Banner Photo",
-  "profile.photo": "Profile Photo"
+  "profile.photo": "Profile Photo",
+  "no.following.message": "You're not following anyone yet. Start following users to see their posts",
+  "end.message": "You're up to date",
+  "loading.message": "Loading"
 }

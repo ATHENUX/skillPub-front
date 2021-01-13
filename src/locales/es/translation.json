@@ -106,5 +106,8 @@
   "invalid.extension": "Extension invalida",
   "main.info.updated": "Información principal editada",
   "banner.photo": "Pancarta",
-  "profile.photo": "Foto de perfil"
+  "profile.photo": "Foto de perfil",
+  "no.following.message": "Todavia no estas siguiendo a alguien. Empieza a seguir a usuarios para ver sus publicaciones",
+  "end.message": "Estas al día",
+  "loading.message": "Cargando"
 }
