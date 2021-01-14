@@ -55,7 +55,6 @@ const EditProfilePhoto = ({ user }) => {
           },
         };
         const res = await axios.put("/api/updateProfilePhoto", profPhoto, config);
-        console.log(res.data);
         const { success, message, userUpdated } = res.data;
         if (success) {
           if (message === "Successfully added avatar") {

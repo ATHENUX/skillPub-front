@@ -69,7 +69,6 @@ const EditBannerPhoto = ({ user, updateByField }) => {
           const res = await axios.put("/api/updateBanner", banner, config);
           const { success, message, userUpdated } = res.data;
           if (success) {
-            console.log("successfully updated the banner");
             if (message === "Successfully added banner") {
               initialSnackBarProps.severity = "success";
               initialSnackBarProps.message = t("successfully.added.banner");
@@ -118,7 +117,7 @@ const EditBannerPhoto = ({ user, updateByField }) => {
             {photo ? (
               <Image
                 publicId={photo}
-                cloudName={process.env.REACT_APP_CLOUD_NAME}
+                cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
                 className={classes.bannerPhoto}
               />
             ) : bannerPhoto ? (

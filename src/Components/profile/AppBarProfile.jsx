@@ -41,7 +41,7 @@ const AppBarProfile = ({ isFixed, user }) => {
             <Divider orientation="vertical" flexItem />
           </>
         )}
-        <Button>{t("favorites")}</Button>
+        {/* <Button>{t("favorites")}</Button> */}
       </Card>
       <EditProfileDialog open={open} handleClose={handleClose} />
     </Hidden>

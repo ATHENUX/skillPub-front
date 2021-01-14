@@ -105,7 +105,6 @@ const AddPost = ({ user }) => {
       setIsLoading(false);
       setPreviewImages([]);
       initialSnackBarProps.message = t("internal.server.error.title");
-      console.log(error.message);
     }
     setSnackBar({
       ...initialSnackBarProps,

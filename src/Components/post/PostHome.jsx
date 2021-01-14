@@ -173,11 +173,15 @@ const PostHome = ({ post, user }) => {
           {post?.thumbnailsList.length === 1 ? (
             <Image
               publicId={post?.thumbnailsList[0]}
-              cloudName={process.env.REACT_APP_CLOUD_NAME}
+              cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
             />
           ) : (
             post?.thumbnailsList.map((img, id) => (
-              <Image key={id} publicId={img} cloudName={process.env.REACT_APP_CLOUD_NAME} />
+              <Image
+                key={id}
+                publicId={img}
+                cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
+              />
             ))
           )}
         </Carousel>

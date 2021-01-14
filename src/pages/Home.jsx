@@ -47,7 +47,6 @@ const Home = ({ posts, user, setPosts }) => {
         );
         const { success } = res.data;
         if (success) {
-          console.log("Has more: ", res.data.hasMore);
           setHasMore(res.data.hasMore);
           setPosts(res.data.posts);
         }
