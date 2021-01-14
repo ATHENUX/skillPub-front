@@ -11,7 +11,7 @@ import { Alert } from "@material-ui/lab";
 
 //components
 import AddPost from "Components/addPosts/AddPost";
-import PostHome from "Components/post/PostHome";
+import Post from "Components/post/Post";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 //i18n
@@ -97,7 +97,7 @@ const Home = ({ posts, user, setPosts }) => {
             }
           >
             {posts?.map((post) => (
-              <PostHome post={post} />
+              <Post post={post} />
             ))}
           </InfiniteScroll>
         ) : (

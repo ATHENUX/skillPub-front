@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { setPosts } from "Redux/Reducers/Posts";
-import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
 
 //material-UI
 import {
@@ -29,8 +28,10 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const Post = ({ post, posts, setPosts, id, user, myUser }) => {
-  const classes = usePostStyles();
+const Post = ({ post, user }) => {
+  const [activeShare, setActiveShare] = useState(false);
+  const [liked, setLiked] = useState(false);
+
   const [snackBar, setSnackBar] = useState({
     show: false,
     message: "",
@@ -38,18 +39,23 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
     horizontal: "center",
     severity: "error",
   });
-  const [activeShare, setActiveShare] = useState(false);
+  const classes = usePostStyles();
   const { register, handleSubmit, errors } = useForm();
   const { t } = useTranslation();
 
-  const handleCloseSnackBar = () => {
-    setSnackBar({ ...snackBar, show: false, severity: "error" });
-  };
+  useEffect(() => {
+    const find = post.likesList.find((id) => {
+      return id === user._id;
+    });
+    if (find !== undefined) {
+      setLiked(true);
+    }
+  }, [post, user]);
 
   const handleRepublish = async (data) => {
     try {
-      const findUser = posts[id].republishedUsersId.find((id) => {
-        return id === myUser._id;
+      const findUser = post.republishedUsersId.find((id) => {
+        return id === user._id;
       });
 
       if (findUser !== undefined) {
@@ -61,17 +67,17 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
       } else {
         //the model of the data to send to create the republication
         const share = {
-          userId: myUser._id,
+          userId: user._id,
           thumbnailsList: post?.thumbnailsList,
           republishedValidation: true,
           bodyContent: data.bodyContent,
           republishedBodyContent: post?.bodyContent,
-          republishedUserId: user._id,
+          republishedUserId: post.userId._id,
         };
 
         //the model of the data to send to assign the user who published the original publication and to know the number of Republicans that the publication has
         const republishedIds = {
-          userId: myUser._id,
+          userId: user._id,
           postId: post._id,
         };
 
@@ -83,10 +89,6 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
 
         const { success, message } = res.data;
         if (success) {
-          const newPosts = posts;
-          const republishedUsersId = posts[id].republishedUsersId;
-          newPosts[id].republishedUsersId = [...republishedUsersId, user._id];
-          setPosts([...newPosts]);
           setSnackBar({
             ...snackBar,
             message: t("post.republished.message.success"),
@@ -95,7 +97,11 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
           });
         } else {
           if (message === "Already published") {
-            setSnackBar({ ...snackBar, message: t("post.republished.message.error"), show: true });
+            setSnackBar({
+              ...snackBar,
+              message: t("post.republished.message.error"),
+              show: true,
+            });
           }
         }
       }
@@ -106,20 +112,56 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
     }
   };
 
+  const handleCloseSnackBar = () => {
+    setSnackBar({ ...snackBar, show: false, severity: "error" });
+  };
+
+  const handleLike = async () => {
+    try {
+      const res = await axios.post(
+        "/api/likePost",
+        { postId: post._id, userId: user._id },
+        { headers: { auth: localStorage.getItem("session") } }
+      );
+      const { success } = res.data;
+      if (success) {
+        setLiked(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDislike = async () => {
+    try {
+      const res = await axios.post(
+        "/api/dislikePost",
+        { postId: post._id, userId: user._id },
+        { headers: { auth: localStorage.getItem("session") } }
+      );
+      const { success } = res.data;
+      if (success) {
+        setLiked(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Card className={classes.post} elevation={1}>
         {!post?.republishedValidation ? (
           <SimpleHeader
-            avatar={user?.avatar}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
+            avatar={post?.userId?.avatar}
+            firstName={post?.userId?.firstName}
+            lastName={post?.userId?.lastName}
           />
         ) : (
           <HardHeader
-            avatar={user?.avatar}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
+            avatar={post?.userId?.avatar}
+            firstName={post?.userId?.firstName}
+            lastName={post?.userId?.lastName}
             avatarRepublish={post?.republishedUserId?.avatar}
             firstNameRepublish={post?.republishedUserId?.firstName}
             lastNameRepublish={post?.republishedUserId?.lastName}
@@ -127,34 +169,34 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
           />
         )}
 
-        {post?.thumbnailsList.length !== 0 && (
-          <Carousel className={classes.media} fullHeightHover autoPlay={false}>
-            {post?.thumbnailsList.length === 1 ? (
+        <Carousel className={classes.media} fullHeightHover autoPlay={false}>
+          {post?.thumbnailsList.length === 1 ? (
+            <Image
+              publicId={post?.thumbnailsList[0]}
+              cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
+            />
+          ) : (
+            post?.thumbnailsList.map((img, id) => (
               <Image
-                publicId={post?.thumbnailsList[0]}
+                key={id}
+                publicId={img}
                 cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
               />
-            ) : (
-              post?.thumbnailsList.map((img, id) => (
-                <Image
-                  key={id}
-                  publicId={img}
-                  cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
-                />
-              ))
-            )}
-          </Carousel>
-        )}
+            ))
+          )}
+        </Carousel>
 
         <CardContent>
           <Typography>{post?.bodyContent}</Typography>
         </CardContent>
         <Actions
-          likes={post?.likesList?.length}
-          comments={post?.comments?.length}
-          republishValue={post?.republishedUsersId?.length}
-          favorites={post?.favorites?.length}
+          liked={liked}
+          comments={5}
+          republishValue={7}
+          favorites={2}
           handleRepublish={() => setActiveShare(true)}
+          handleLike={handleLike}
+          handleDislike={handleDislike}
         />
         {activeShare && (
           <div>
@@ -193,12 +235,8 @@ const Post = ({ post, posts, setPosts, id, user, myUser }) => {
 };
 
 const mapStateToProps = (state) => ({
-  posts: state.Posts,
-  myUser: state.User,
+  user: state.User,
+  // posts: state.Posts,
 });
 
-const mapDispatchToProps = {
-  setPosts,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(Post);

@@ -109,5 +109,9 @@
   "profile.photo": "Profile Photo",
   "no.following.message": "You're not following anyone yet. Start following users to see their posts",
   "end.message": "You're up to date",
-  "loading.message": "Loading"
+  "loading.message": "Loading",
+  "no.posts":"You haven't posted anything yet, why don't you make one?",
+  "user.no.posts":"This user has no posts",
+  "end.profile":"End of profile"
+
 }

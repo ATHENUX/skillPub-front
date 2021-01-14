@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 import { constants } from "constants/constants";
 
 //material-UI
+import { Typography } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useProfileStyles } from "Assets/Styles/profileStyles";
+import { Alert } from "@material-ui/lab";
 
 //componensts
 import Sidebar from "Components/profile/Sidebar";
@@ -15,9 +17,10 @@ import SkeletonSidebar from "Components/profile/SkeletonSidebar";
 import SkeletonSidebarMd from "Components/profile/SkeletonSidebarMd";
 import AppBarProfile from "Components/profile/AppBarProfile";
 import AppBarProfileMd from "Components/profile/AppBarProfileMd";
-import Post from "Components/post/Post";
 import SnackBar from "Components/SnackBar";
 import { Image } from "cloudinary-react";
+import Post from "Components/post/Post";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 //i18n
 import { useTranslation } from "react-i18next";
@@ -42,9 +45,8 @@ const Profile = ({ setPosts, posts, userState }) => {
   const classes = useProfileStyles();
   const [user, setUser] = useState({});
   const [limit, setLimit] = useState(constants.numberPosts);
-  const [postsCount, setPostsCount] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const ref = useRef(null);
-  const visor = useRef(null);
   const { userID } = useParams();
   const { t } = useTranslation();
 
@@ -60,58 +62,6 @@ const Profile = ({ setPosts, posts, userState }) => {
     };
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.post(
-          "/api/getUser",
-          { id: userID },
-          { headers: { auth: localStorage.getItem("session") } }
-        );
-        const resCountPosts = await axios.post(
-          "/api/countPosts",
-          { id: userID },
-          { headers: { auth: localStorage.getItem("session") } }
-        );
-
-        if (res.data.success && resCountPosts.data.success) {
-          setPostsCount(resCountPosts.data.count + constants.numberPosts);
-          setUser(res.data.user);
-          setloading(true);
-        }
-      } catch (error) {
-        setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
-      }
-    })();
-  }, [userID, snackBar, t, setPosts]);
-
-  useEffect(() => {
-    const callback = async (entries, observer) => {
-      const el = entries[0];
-      if (limit <= postsCount) {
-        if (el.isIntersecting) {
-          const res = await axios.post(
-            "/api/getPostsProfile",
-            { id: userID, limit },
-            { headers: { auth: localStorage.getItem("session") } }
-          );
-
-          if (res.data.success) {
-            setLimit(limit + constants.numberPosts);
-            observer.disconnect();
-            setPosts(res.data.posts);
-          }
-        }
-      }
-    };
-    let observer = new IntersectionObserver(callback, {
-      rootMargin: "1000px",
-      threshold: 1.0,
-    });
-
-    observer.observe(visor.current);
-  }, [setPosts, userID, limit, postsCount]);
-
   const handleScroll = () => {
     if (ref.current) {
       setIsFixed(Boolean(ref.current.getBoundingClientRect().top <= -136));
@@ -126,6 +76,63 @@ const Profile = ({ setPosts, posts, userState }) => {
 
   const handleCloseSnackBar = () => {
     setSnackBar({ ...snackBar, show: false, severity: "error" });
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.post(
+          "/api/getUser",
+          { id: userID },
+          { headers: { auth: localStorage.getItem("session") } }
+        );
+
+        if (res.data.success) {
+          setUser(res.data.user);
+          setloading(true);
+        }
+      } catch (error) {
+        setSnackBar({ ...snackBar, show: true, message: t("internal.server.error.title") });
+      }
+    })();
+  }, [userID, snackBar, t, setPosts]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.post(
+          "/api/getPostsProfile",
+          { id: userID, limit },
+          { headers: { auth: localStorage.getItem("session") } }
+        );
+
+        if (res.data.success) {
+          setHasMore(res.data.hasMore);
+          setPosts(res.data.posts);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [setPosts, userID, limit]);
+
+  const fetchMoreData = async () => {
+    const newLimit = limit + constants.numberPosts;
+    setLimit(newLimit);
+    try {
+      const res = await axios.post(
+        "/api/getPostsProfile",
+        { id: userID, limit },
+        { headers: { auth: localStorage.getItem("session") } }
+      );
+      const { success } = res.data;
+      if (success) {
+        setHasMore(res.data.hasMore);
+        setPosts(res.data.posts);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -155,12 +162,36 @@ const Profile = ({ setPosts, posts, userState }) => {
 
       <AppBarProfile isFixed={isFixed} user={user} />
       <AppBarProfileMd isFixed={isFixedMd} user={user} />
+
       <div className={classes.postContainer}>
-        {posts?.map((post, id) => (
-          <Post key={post._id} user={user} post={post} id={id} />
-        ))}
-        <div id="visor" ref={visor}></div>
+        {posts.length !== 0 ? (
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={
+              <Typography variant="subtitle2" align="center">
+                {t("loading.message")}
+              </Typography>
+            }
+            endMessage={
+              <Alert severity="info" variant="filled" style={{ margin: "10px 0" }}>
+                {t("end.profile")}
+              </Alert>
+            }
+          >
+            {posts?.map((post) => (
+              <Post post={post} />
+            ))}
+          </InfiniteScroll>
+        ) : (
+          <Alert style={{ marginTop: 10 }} severity="info" variant="outlined">
+            {userID === userState._id && t("no.posts")}
+            {userID !== userState._id && t("user.no.posts")}
+          </Alert>
+        )}
       </div>
+
       <SnackBar snackBar={snackBar} handleClose={handleCloseSnackBar} />
     </div>
   );

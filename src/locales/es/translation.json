@@ -109,5 +109,8 @@
   "profile.photo": "Foto de perfil",
   "no.following.message": "Todavia no estas siguiendo a alguien. Empieza a seguir a usuarios para ver sus publicaciones",
   "end.message": "Estas al día",
-  "loading.message": "Cargando"
+  "loading.message": "Cargando",
+  "no.posts":"Aún no has publicado nada, ¿por qué no haces uno?",
+  "user.no.posts":"Este usuario no tiene publicaciones",
+  "end.profile":"Final del perfil"
 }
