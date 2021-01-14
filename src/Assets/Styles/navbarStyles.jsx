@@ -136,8 +136,8 @@ export const StyledMenuItem = withStyles((theme) => ({
 
 export const useNavbarSetting = makeStyles((theme) => ({
   appBar: {
-    position: "relative",
-    zIndex: theme.zIndex.drawer + 1,
+    position: "relative!important",
+    zIndex: theme.zIndex.drawer + 1 + "!important",
   },
   title: {
     marginLeft: theme.spacing(2),
