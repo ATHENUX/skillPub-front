@@ -1,16 +1,28 @@
 //materila-UI
-import { Button, Container } from "@material-ui/core";
+import { Button, Container, Typography, Divider } from "@material-ui/core";
+
+//i18n
+import { useTranslation } from "react-i18next";
+
+//hooks
+import useLanguageBrowser from "Hooks/useLanguageBrowser";
 
 const Successful = ({ finish }) => {
+  const { t } = useTranslation();
+  useLanguageBrowser();
+
   return (
     <Container>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil, repudiandae similique.
-        Quae, dicta reiciendis! Necessitatibus, atque nam et exercitationem ex magni porro
-        laboriosam! Soluta aperiam perspiciatis perferendis dicta quam ratione.
-      </p>
+      <Typography variant="h3">{t("great.settings")}</Typography>
+      <Typography variant="h6">{t("welcome.Skillpub")}</Typography>
+      <Divider />
+      <Typography variant="h6">{t("what.skillpub")}</Typography>
+      <Typography variant="body1">{t("skillpub.social.network")}</Typography>
+      <Typography variant="h6">{t("version")}</Typography>
+      <Typography variant="body1">{t("version.body")}</Typography>
+
       <Button variant="contained" color="primary" onClick={finish}>
-        finish
+        {t("finish")}
       </Button>
     </Container>
   );
