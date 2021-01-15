@@ -15,8 +15,8 @@ import {
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
 import PanToolIcon from "@material-ui/icons/PanTool";
 import SettingsIcon from "@material-ui/icons/Settings";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import FeedbackIcon from "@material-ui/icons/Feedback";
+// import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+// import FeedbackIcon from "@material-ui/icons/Feedback";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
