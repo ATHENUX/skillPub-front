@@ -68,7 +68,7 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        {/* <StyledMenuItem>
           <ListItem component="div">
             <ListItemAvatar>
               <Avatar>
@@ -78,7 +78,7 @@ const CustomizedMenus = ({ changeThemeMode, mode }) => {
             <ListItemText primary={t("feed.back")} secondary={t("feed.back.text.secondary")} />
             <ArrowForwardIosIcon />
           </ListItem>
-        </StyledMenuItem>
+        </StyledMenuItem> */}
 
         <Divider component="li" />
 

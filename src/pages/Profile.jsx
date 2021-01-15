@@ -140,16 +140,10 @@ const Profile = ({ setPosts, posts, userState }) => {
       <div className={classes.bannerContent}>
         {loading ? (
           <>
-            {userState.banner ? (
+            {userState.banner && (
               <Image
                 publicId={userState.banner}
                 cloudName={process.env.REACT_APP_CLOUD_NAME || "dmv4ug7sg"}
-              />
-            ) : (
-              <img
-                src="https://cdn.shortpixel.ai/client/q_glossy,ret_img/https://imkova.cl/wp-content/uploads/2020/07/banner-editable-Fortnite-1.jpg"
-                alt="banner"
-                ref={ref}
               />
             )}
           </>

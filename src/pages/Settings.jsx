@@ -30,7 +30,7 @@ const Settings = ({ getUserData }) => {
   const theme = useTheme();
   const orientation = useMediaQuery(theme.breakpoints.down("sm"));
   const classes = useSettingsStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2); //no se guarda en el momento
   const [gender, setGender] = useState("F");
   const [checked, setChecked] = useState(false);
   const [location, setLocation] = useState({});

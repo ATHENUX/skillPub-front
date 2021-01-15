@@ -112,6 +112,12 @@
   "loading.message": "Loading",
   "no.posts":"You haven't posted anything yet, why don't you make one?",
   "user.no.posts":"This user has no posts",
-  "end.profile":"End of profile"
-
+  "end.profile":"End of profile",
+  "great.settings":"Great, you did all the necessary settings",
+  "welcome.Skillpub":"We want to welcome you to Skillpub, we hope to be of help",
+  "what.skillpub":"What is Skillpub?",
+  "skillpub.social.network":"Skillpub is a small social network with the purpose of sharing and following another user,our purpose is to improve the application to provide better services as it grows",
+  "version":"Version",
+  "version.body":"The application is in version 0.0.1 which has functions such as creating a profile,uploading publications, liking these publications or following other users",
+  "finish":"Finish"
 }

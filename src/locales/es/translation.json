@@ -112,5 +112,12 @@
   "loading.message": "Cargando",
   "no.posts":"Aún no has publicado nada, ¿por qué no haces uno?",
   "user.no.posts":"Este usuario no tiene publicaciones",
-  "end.profile":"Final del perfil"
+  "end.profile":"Final del perfil",
+  "great.settings":"Genial, hiciste todos los ajustes necesarios",
+  "welcome.Skillpub":"Queremos darte la bienvenida a Skillpub, esperamos ser de ayuda",
+  "what.skillpub":"¿Qué es Skillpub?",
+  "skillpub.social.network":"Skillpub es una pequeña red social con el propósito de compartir y seguir a otro usuario, nuestro propósito es mejorar la aplicación para brindar mejores servicios a medida que crece",
+  "version":"Versión",
+  "version.body":"La aplicación se encuentra en la versión 0.0.1 la cual tiene funciones como crear un perfil, subir publicaciones, dar me gusta a estas publicaciones o seguir a otros usuarios",
+  "finish":"Terminar"
 }
