@@ -20,6 +20,8 @@ const initialState = {
   savedposts: [],
   sharedPosts: [],
   updatedAt: "",
+  avatar: "",
+  banner: "",
   __v: 0,
   _id: "",
 };

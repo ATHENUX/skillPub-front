@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 //axios
 import axios from "axiosConfig";
 
-const EditProfilePhoto = ({ user }) => {
+const EditProfilePhoto = ({ user, updateByField }) => {
   const initialSnackBarProps = {
     show: false,
     message: "",
@@ -64,6 +64,9 @@ const EditProfilePhoto = ({ user }) => {
             initialSnackBarProps.severity = "success";
             initialSnackBarProps.message = t("successfully.updated.profilePhoto");
           }
+          updateByField({
+            avatar: userUpdated.avatar,
+          });
         } else {
           if (message === "File too large") {
             initialSnackBarProps.message = t("file.too.large");
@@ -150,4 +153,8 @@ const EditProfilePhoto = ({ user }) => {
 
 const mapStateToProps = (state) => ({ user: state.User });
 
-export default connect(mapStateToProps)(EditProfilePhoto);
+const mapDispatchToProps = {
+  updateByField,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfilePhoto);
